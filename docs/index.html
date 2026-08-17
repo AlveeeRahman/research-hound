@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research Hound — the extended research skill for Claude</title>
+<meta name="description" content="Research Hound is a research skill for Claude Code: a six-stage scientific workflow with 26 runnable scripts — literature search across PubMed/arXiv/Semantic Scholar, citation verification, claim-evidence audits, manuscript linting, and rubric scoring with inter-rater agreement.">
+<link rel="canonical" href="https://alveeerahman.github.io/research-hound/">
+<meta property="og:title" content="Research Hound — the extended research skill for Claude">
+<meta property="og:description" content="Six research stages, twenty-six verification scripts: literature review with citation verification, claim audits, manuscript linting, and rubric evaluation for Claude Code.">
+<meta property="og:url" content="https://alveeerahman.github.io/research-hound/">
+<meta property="og:type" content="website">
+<style>
+  :root { --ink:#1f2937; --sub:#4b5563; --line:#e5e7eb; --accent:#1d4ed8; --bg:#ffffff; --code:#f3f4f6; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink:#e5e7eb; --sub:#9ca3af; --line:#374151; --accent:#60a5fa; --bg:#111827; --code:#1f2937; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.65 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  h1 { font-size: 2rem; line-height:1.2; margin: 0 0 .5rem; }
+  h2 { font-size: 1.3rem; margin: 2.2rem 0 .6rem; }
+  p { margin: .7rem 0; }
+  .sub { color: var(--sub); font-size: 1.05rem; }
+  a { color: var(--accent); }
+  pre { background: var(--code); padding: .9rem 1rem; border-radius: 8px; overflow-x:auto; font-size:.85rem; line-height:1.5; }
+  code { background: var(--code); padding:.1rem .3rem; border-radius:4px; font-size:.9em; }
+  table { border-collapse: collapse; width:100%; font-size:.92rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); }
+  .cta { display:inline-block; margin:.8rem .6rem 0 0; padding:.55rem 1rem; border:1px solid var(--accent); border-radius:8px; text-decoration:none; font-weight:600; }
+  footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); color:var(--sub); font-size:.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>🐕 Research Hound</h1>
+  <p class="sub"><strong>The extended research skill for Claude.</strong> A six-stage scientific research workflow for Claude Code — critical thinking, literature review, brainstorming, schematics, writing, evaluation — backed by 26 runnable scripts that verify what a chat model would otherwise just assert.</p>
+
+  <p>
+    <a class="cta" href="https://github.com/AlveeeRahman/research-hound">GitHub repository</a>
+    <a class="cta" href="https://github.com/AlveeeRahman/research-hound/releases/latest">Latest release</a>
+  </p>
+
+  <h2>Install as a Claude Code skill</h2>
+  <pre><code>git clone https://github.com/AlveeeRahman/research-hound.git ~/.claude/skills/research-hound</code></pre>
+  <p>Python 3.9+, standard library only except <code>requests</code> in the two network scripts. Then ask Claude: <em>"search the literature on X and verify every citation"</em>, <em>"audit the claims in my methods section"</em>, <em>"is this analysis p-hacked?"</em>, <em>"score this manuscript against the rubric"</em>.</p>
+
+  <h2>Six stages, twenty-six checks</h2>
+  <table>
+    <tr><th>#</th><th>Stage</th><th>Runnable tooling</th></tr>
+    <tr><td>1</td><td>Critical thinking</td><td>Evidence hierarchy, logical fallacies, statistical pitfalls, bias catalogs</td></tr>
+    <tr><td>2</td><td>Literature review</td><td>PubMed / arXiv / Semantic Scholar search, <strong>citation verification</strong>, PDF generation</td></tr>
+    <tr><td>3</td><td>Brainstorming</td><td>Scored ideation matrix, session scaffolds</td></tr>
+    <tr><td>4</td><td>Schematics</td><td>Figure and diagram generation with iterative refinement</td></tr>
+    <tr><td>5</td><td>Writing</td><td>IMRaD scaffold, manuscript lint, <strong>claim-evidence audit</strong>, reference checks, CONSORT / PRISMA / STROBE selection</td></tr>
+    <tr><td>6</td><td>Evaluation</td><td>Rubric validation and scoring, <strong>inter-rater agreement</strong>, weight sensitivity, traceability</td></tr>
+  </table>
+
+  <h2>Why not just use Claude's built-in research?</h2>
+  <p>Built-in web search and Deep Research are retrieval and synthesis — one pass, inside the chat. Research Hound is a <strong>methodology harness</strong>: citations get verified rather than merely cited, manuscript claims are traced to evidence, and every check is a plain CLI your CI can re-run. It covers what happens <em>before</em> the search (interrogating the question) and <em>after</em> it (writing, auditing, and scoring the result).</p>
+
+  <footer>
+    MIT licensed · <a href="https://github.com/AlveeeRahman/research-hound">github.com/AlveeeRahman/research-hound</a> · QA'd by <a href="https://github.com/AlveeeRahman/skill-vision">skill-vision</a> in CI on every push.
+  </footer>
+</main>
+</body>
+</html>
