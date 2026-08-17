@@ -29,14 +29,6 @@ Python 3.9+; standard library only, except `requests` in the two network scripts
 > *"Is this analysis p-hacked?"*
 > *"Score this manuscript against the rubric and report inter-rater agreement."*
 
-## Audited, not just published
-
-Genuine output of [skill-vision](https://github.com/AlveeeRahman/skill-vision) (the QA
-skill for Claude skills) inspecting this repo:
-
-```text
-=== research-hound  [router] · ~2.7k tokens (description 233 every session + body 2.4k on trigger) ===
-  CONFORMANT  (0 errors, 0 warnings, 25 notes)
 ```
 
 In skill-vision's field audit of a 20-skill corpus, this skill took the **top quality
