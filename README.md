@@ -34,16 +34,46 @@ Python 3.9+; standard library only, except `requests` in the two network scripts
 In skill-vision's field audit of a 20-skill corpus, this skill took the **top quality
 score of the entire corpus**. CI re-runs the same spec validation on every push.
 
-## The six stages
+## The hound's route: six stages, twenty-six checks
 
-| Stage | Guide | Deterministic tooling |
-|---|---|---|
-| Critical thinking | `guides/critical-thinking.md` | Evidence hierarchy, logical fallacies, statistical pitfalls, bias catalogs (`references/critical-thinking/`) |
-| Literature review | `guides/literature-review.md` | `search_databases.py` (PubMed / arXiv / Semantic Scholar), `verify_citations.py`, `generate_pdf.py` |
-| Brainstorming | `guides/brainstorming.md` | Ideation methods, scored triage, facilitation workflows |
-| Schematics | `guides/schematics.md` | Diagram generation and iterative refinement scripts |
-| Writing | `guides/writing.md` | `scaffold_manuscript.py` (IMRaD), `lint_manuscript.py`, `audit_claims.py`, `check_references.py`, `check_consistency.py`, `select_reporting_guidelines.py` (CONSORT / PRISMA / STROBE), `validate_authorship.py` |
-| Evaluation | `guides/evaluation.md` | `validate_rubric.py`, `calculate_scores.py`, `summarize_agreement.py` (inter-rater), `weight_sensitivity.py`, `check_traceability.py` |
+A research question goes in one end; a manuscript that can survive review comes out the
+other. No stage is skippable, and every stage past the first carries its own runnable
+tooling:
+
+```mermaid
+flowchart LR
+    q[/"❓ research question"/] --> ct
+    subgraph THINK["Interrogate — before you search"]
+        ct["1 · critical thinking<br/>evidence hierarchy · bias & fallacy screens"]
+    end
+    subgraph GATHER["Gather & shape"]
+        direction LR
+        lr["2 · literature review<br/>3 scripts · PubMed / arXiv / S2<br/>+ citation verification"] --> bs["3 · brainstorming<br/>4 scripts · scored ideation triage"]
+        bs --> sc["4 · schematics<br/>2 scripts · figures & diagrams"]
+    end
+    subgraph SHIP["Write & judge"]
+        direction LR
+        wr["5 · writing<br/>9 scripts · IMRaD scaffold →<br/>claim audit → manuscript lint"] --> ev["6 · evaluation<br/>8 scripts · rubric scores +<br/>inter-rater agreement"]
+    end
+    ct --> lr
+    sc --> wr
+    ev --> out{{"📄 work that survives review"}}
+    classDef think fill:#f59e0b,stroke:#b45309,color:#1f2937
+    classDef gather fill:#3b82f6,stroke:#1d4ed8,color:#ffffff
+    classDef ship fill:#22c55e,stroke:#15803d,color:#1f2937
+    class ct think
+    class lr,bs,sc gather
+    class wr,ev ship
+```
+
+| # | Stage | Scripts | What actually runs |
+|--:|---|--:|---|
+| 1 | Critical thinking | — | Evidence hierarchy, logical fallacies, statistical pitfalls, bias catalogs (`references/critical-thinking/`) |
+| 2 | Literature review | 3 | `search_databases.py` (PubMed / arXiv / Semantic Scholar), `verify_citations.py`, `generate_pdf.py` |
+| 3 | Brainstorming | 4 | Scored ideation matrix, session scaffolds, register validation |
+| 4 | Schematics | 2 | Diagram generation with iterative refinement |
+| 5 | Writing | 9 | `scaffold_manuscript.py` (IMRaD), `lint_manuscript.py`, `audit_claims.py`, `check_references.py`, `check_consistency.py`, `select_reporting_guidelines.py` (CONSORT / PRISMA / STROBE), `validate_authorship.py` |
+| 6 | Evaluation | 8 | `validate_rubric.py`, `calculate_scores.py`, `summarize_agreement.py` (inter-rater), `weight_sensitivity.py`, `check_traceability.py` |
 
 ## How research-hound differs — the validation
 
@@ -70,15 +100,28 @@ sources and write summaries, in one pass, inside the chat. research-hound is a
   responsible-AI brainstorming constraints, and reporting-guideline selection
   (CONSORT / PRISMA / STROBE) are first-class steps, not afterthoughts.
 
-### vs. other research skills on GitHub
+### vs. the top research skills on GitHub
 
-The field (`academic-research-skills-claude`, `DResearch-Skill`,
-`paper-research-skill_claude`, and kin) is mostly **prompt-only guides or single-phase
-deep-research loops** — instructions for the model, with nothing executable behind them.
-research-hound's difference is substance: 46 reference documents organized by stage plus
-26 scripts that make the claims checkable. Where a lighter skill fits better — a
-one-shot news digest, a single-domain financial screen — use the lighter skill; this one
-is for work that has to survive review.
+Surveyed August 2026 against the most-starred repos in the class (this niche's leaders
+sit at 1–2 stars — the field is young):
+
+| | research-hound | `rongarede/claude-skills-research` | `chgagne/claude-skills-research` | `jamoeight/deep-research-v2` |
+|---|:---:|:---:|:---:|:---:|
+| Shape | one staged workflow, question → publication | 8 independent point skills | review-support skills (ML/CS + HPC) | multi-agent deep-research harness |
+| End-to-end lifecycle (think → search → write → judge) | ✅ 6 stages | ❌ | ❌ review-centric | ❌ report-centric (6 phases of *search*) |
+| Runnable verification scripts | ✅ 26 | partial (paper lookup/download) | ✅ (bibliography checks, guard-tested stdlib) | ❌ orchestration, not local CLIs |
+| Citation verification | ✅ `verify_citations.py` | via Semantic Scholar skill | ✅ | ❌ |
+| Manuscript pipeline (IMRaD scaffold → claim audit → lint → reporting guidelines) | ✅ | ❌ | ❌ | ❌ |
+| Rubric evaluation with inter-rater agreement | ✅ | ❌ | ❌ | evaluator-driven search only |
+| Externally QA-audited + CI-validated | ✅ skill-vision, every push | ❌ | ❌ | ❌ |
+
+Honest credit where due: `chgagne`'s bibliography tooling is real and its
+stdlib-guard-test discipline is excellent; `jamoeight/deep-research-v2` is the strongest
+*search orchestration* in the class. Neither covers the lifecycle — what happens before
+the search (interrogating the question) and after it (writing, auditing, and scoring the
+result) is where research-hound lives. Where a lighter skill fits better — a one-shot
+digest, a single-domain screen — use the lighter skill; this one is for work that has to
+survive review.
 
 ## claude.ai / Desktop upload caveat
 
