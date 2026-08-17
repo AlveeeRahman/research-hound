@@ -29,11 +29,6 @@ Python 3.9+; standard library only, except `requests` in the two network scripts
 > *"Is this analysis p-hacked?"*
 > *"Score this manuscript against the rubric and report inter-rater agreement."*
 
-```
-
-In skill-vision's field audit of a 20-skill corpus, this skill took the **top quality
-score of the entire corpus**. CI re-runs the same spec validation on every push.
-
 ## The hound's route: six stages, twenty-six checks
 
 A research question goes in one end; a manuscript that can survive review comes out the
