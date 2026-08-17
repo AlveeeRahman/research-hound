@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: "Skill QA"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: All scripts compile
+        run: python -m compileall -q scripts
+
+      - name: Get skill-vision (the QA skill)
+        run: git clone --depth 1 https://github.com/AlveeeRahman/skill-vision.git /tmp/skill-vision
+
+      - name: Self-validate against the Agent Skills spec
+        run: python /tmp/skill-vision/scripts/spec_validator.py .
