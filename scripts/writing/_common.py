@@ -11,6 +11,9 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "_shared"))
+import safe_io  # noqa: E402
+
 MAX_FILE_BYTES = 5_000_000
 MAX_RECORDS = 10_000
 MAX_JSON_NODES = 100_000
@@ -18,7 +21,7 @@ MAX_JSON_DEPTH = 50
 MAX_CSV_FIELD_BYTES = 100_000
 
 
-class InputError(ValueError):
+class InputError(safe_io.SafeIOError):
     """Raised when a local input fails a bounded safety check."""
 
 
@@ -33,28 +36,14 @@ class Issue:
         return {key: value for key, value in asdict(self).items() if value is not None}
 
 
-def _checked_file(path_value: str | Path, suffixes: Iterable[str]) -> Path:
-    path = Path(path_value)
-    allowed = {suffix.lower() for suffix in suffixes}
-    if path.is_symlink():
-        raise InputError("symbolic-link inputs are not accepted")
-    if not path.is_file():
-        raise InputError("input must be an existing regular file")
-    if path.suffix.lower() not in allowed:
-        raise InputError(
-            f"input extension must be one of: {', '.join(sorted(allowed))}"
-        )
-    if path.stat().st_size > MAX_FILE_BYTES:
-        raise InputError(f"input exceeds {MAX_FILE_BYTES} bytes")
-    return path
-
-
 def read_text(path_value: str | Path, suffixes: Iterable[str]) -> str:
-    path = _checked_file(path_value, suffixes)
     try:
-        return path.read_text(encoding="utf-8")
-    except UnicodeDecodeError as exc:
-        raise InputError("input must be UTF-8 text") from exc
+        _path, text = safe_io.open_bounded(
+            path_value, suffixes=set(suffixes), max_bytes=MAX_FILE_BYTES
+        )
+        return text
+    except safe_io.SafeIOError as exc:
+        raise InputError(str(exc)) from exc
 
 
 def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:

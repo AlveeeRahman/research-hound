@@ -88,7 +88,7 @@ that is not already settled and say which stage you are entering and why. Do not
 skip stage 1 — an unexamined question produces a well-written paper about the wrong thing,
 which is the most expensive failure in this pipeline.
 
-## Conventions across all five stages
+## Conventions across all six stages
 
 **Separate what is observed from what is inferred.** Every stage has a version of this
 distinction — evidence versus interpretation, idea versus assessment of the idea, result

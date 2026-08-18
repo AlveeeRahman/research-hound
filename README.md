@@ -7,7 +7,7 @@
 **research-hound** is an [Agent Skill](https://code.claude.com/docs/en/skills) for Claude
 Code that turns Claude into a methodical research partner: a six-stage scientific
 workflow — critical thinking, literature review, brainstorming, schematics, writing,
-evaluation — backed by **26 runnable scripts** that verify what a chat model would
+evaluation — backed by **23 runnable scripts** that verify what a chat model would
 otherwise just assert. It hunts down the weak citation, the untraceable claim, and the
 statistical pitfall before a reviewer does.
 
@@ -29,7 +29,7 @@ Python 3.9+; standard library only, except `requests` in the two network scripts
 > *"Is this analysis p-hacked?"*
 > *"Score this manuscript against the rubric and report inter-rater agreement."*
 
-## The hound's route: six stages, twenty-six checks
+## The hound's route: six stages, twenty-three checks
 
 A research question goes in one end; a manuscript that can survive review comes out the
 other. No stage is skippable, and every stage past the first carries its own runnable
@@ -43,12 +43,12 @@ flowchart LR
     end
     subgraph GATHER["Gather & shape"]
         direction LR
-        lr["2 · literature review<br/>3 scripts · PubMed / arXiv / S2<br/>+ citation verification"] --> bs["3 · brainstorming<br/>4 scripts · scored ideation triage"]
+        lr["2 · literature review<br/>3 scripts · PubMed / arXiv / S2<br/>+ citation verification"] --> bs["3 · brainstorming<br/>3 scripts · scored ideation triage"]
         bs --> sc["4 · schematics<br/>2 scripts · figures & diagrams"]
     end
     subgraph SHIP["Write & judge"]
         direction LR
-        wr["5 · writing<br/>9 scripts · IMRaD scaffold →<br/>claim audit → manuscript lint"] --> ev["6 · evaluation<br/>8 scripts · rubric scores +<br/>inter-rater agreement"]
+        wr["5 · writing<br/>8 scripts · IMRaD scaffold →<br/>claim audit → manuscript lint"] --> ev["6 · evaluation<br/>7 scripts · rubric scores +<br/>inter-rater agreement"]
     end
     ct --> lr
     sc --> wr
@@ -65,10 +65,10 @@ flowchart LR
 |--:|---|--:|---|
 | 1 | Critical thinking | — | Evidence hierarchy, logical fallacies, statistical pitfalls, bias catalogs (`references/critical-thinking/`) |
 | 2 | Literature review | 3 | `search_databases.py` (PubMed / arXiv / Semantic Scholar), `verify_citations.py`, `generate_pdf.py` |
-| 3 | Brainstorming | 4 | Scored ideation matrix, session scaffolds, register validation |
+| 3 | Brainstorming | 3 | Scored ideation matrix, session scaffolds, register validation |
 | 4 | Schematics | 2 | Diagram generation with iterative refinement |
-| 5 | Writing | 9 | `scaffold_manuscript.py` (IMRaD), `lint_manuscript.py`, `audit_claims.py`, `check_references.py`, `check_consistency.py`, `select_reporting_guidelines.py` (CONSORT / PRISMA / STROBE), `validate_authorship.py` |
-| 6 | Evaluation | 8 | `validate_rubric.py`, `calculate_scores.py`, `summarize_agreement.py` (inter-rater), `weight_sensitivity.py`, `check_traceability.py` |
+| 5 | Writing | 8 | `scaffold_manuscript.py` (IMRaD), `lint_manuscript.py`, `audit_claims.py`, `check_references.py`, `check_consistency.py`, `select_reporting_guidelines.py` (CONSORT / PRISMA / STROBE), `validate_authorship.py` |
+| 6 | Evaluation | 7 | `validate_rubric.py`, `calculate_scores.py`, `summarize_agreement.py` (inter-rater), `weight_sensitivity.py`, `check_traceability.py` |
 
 ## How research-hound differs — the validation
 
@@ -104,7 +104,7 @@ sit at 1–2 stars — the field is young):
 |---|:---:|:---:|:---:|:---:|
 | Shape | one staged workflow, question → publication | 8 independent point skills | review-support skills (ML/CS + HPC) | multi-agent deep-research harness |
 | End-to-end lifecycle (think → search → write → judge) | ✅ 6 stages | ❌ | ❌ review-centric | ❌ report-centric (6 phases of *search*) |
-| Runnable verification scripts | ✅ 26 | partial (paper lookup/download) | ✅ (bibliography checks, guard-tested stdlib) | ❌ orchestration, not local CLIs |
+| Runnable verification scripts | ✅ 23 | partial (paper lookup/download) | ✅ (bibliography checks, guard-tested stdlib) | ❌ orchestration, not local CLIs |
 | Citation verification | ✅ `verify_citations.py` | via Semantic Scholar skill | ✅ | ❌ |
 | Manuscript pipeline (IMRaD scaffold → claim audit → lint → reporting guidelines) | ✅ | ❌ | ❌ | ❌ |
 | Rubric evaluation with inter-rater agreement | ✅ | ❌ | ❌ | evaluator-driven search only |
@@ -133,7 +133,8 @@ zip -r research-hound.zip research-hound -x "research-hound/.git/*" "research-ho
 - **`SKILL.md`** — the six-stage routing instructions Claude loads (~2.7k tokens total context cost).
 - **`guides/`** — one guide per stage.
 - **`references/`** — 40+ stage-organized reference documents (evidence hierarchies, database strategies, citation styles, IMRaD structure, evaluation frameworks…).
-- **`scripts/`** — 26 CLIs across five stages.
+- **`scripts/`** — 23 CLIs across five stages (critical thinking ships no scripts, by design).
+- **`scripts/_shared/safe_io.py`**: the file-I/O module shared by the brainstorming, evaluation, and writing stages. It opens local files with `O_NOFOLLOW` and checks the resulting descriptor via `os.fstat`, so a symlink swapped in between a check and a read cannot be followed. Each stage keeps its own extra checks on top: duplicate-key rejection, non-finite-number rejection, structure and depth bounds, and, for evaluation, rejection of private-field keys.
 - **`assets/`** — supporting fixtures.
 
 ## License

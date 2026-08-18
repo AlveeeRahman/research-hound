@@ -6,10 +6,14 @@ from __future__ import annotations
 import json
 import math
 import re
+import sys
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 from typing import Any, Iterable
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "_shared"))
+import safe_io  # noqa: E402
 
 SCHEMA_VERSION = "2.0"
 NOTICE = (
@@ -82,7 +86,7 @@ PROXY_TERMS = (
 )
 
 
-class ValidationError(ValueError):
+class ValidationError(safe_io.SafeIOError):
     """A deterministic input failure that never includes a supplied value."""
 
     def __init__(self, code: str, path: str = "$") -> None:
@@ -113,6 +117,10 @@ def _pairs_no_duplicates(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 
 def _check_local_file(path: Path, suffix: str) -> None:
+    """Fast, specifically-coded pre-checks. The actual read is still race-free
+    (see `_race_free_read`) — these run first only to produce evaluation's own
+    granular ValidationError codes for the normal, non-racing case."""
+
     if path.suffix.lower() != suffix:
         raise ValidationError("INPUT_SUFFIX_NOT_ALLOWED")
     if not path.exists():
@@ -123,6 +131,26 @@ def _check_local_file(path: Path, suffix: str) -> None:
         raise ValidationError("INPUT_NOT_REGULAR_FILE")
     if path.stat().st_size > MAX_INPUT_BYTES:
         raise ValidationError("INPUT_TOO_LARGE")
+
+
+def _race_free_read(path: Path, suffix: str, *, encoding: str) -> str:
+    """Read the file that `_check_local_file` just approved, without following a
+    symlink swapped in between the check and this open (TOCTOU-safe)."""
+
+    try:
+        _resolved, text = safe_io.open_bounded(
+            path, suffixes={suffix}, max_bytes=MAX_INPUT_BYTES, encoding=encoding
+        )
+        return text
+    except safe_io.SafeIOError as exc:
+        # A bad encoding is an ordinary, non-racing content failure -- keep its own
+        # code exactly as before. Anything else here only happens if the file
+        # changed between `_check_local_file` passing and this open (TOCTOU),
+        # since that check just approved this same path; one fallback code covers
+        # that whole class, as it is not reachable by any normal input.
+        if isinstance(exc.__cause__, UnicodeDecodeError):
+            raise ValidationError("INPUT_NOT_UTF8") from exc
+        raise ValidationError("INPUT_NOT_READABLE") from exc
 
 
 def _scan_structure(value: Any, path: str = "$") -> None:
@@ -165,13 +193,9 @@ def read_json(path: Path | str) -> Any:
 
     local_path = Path(path)
     _check_local_file(local_path, ".json")
+    text = _race_free_read(local_path, ".json", encoding="utf-8")
     try:
-        data = json.loads(
-            local_path.read_text(encoding="utf-8"),
-            object_pairs_hook=_pairs_no_duplicates,
-        )
-    except UnicodeDecodeError as error:
-        raise ValidationError("INPUT_NOT_UTF8") from error
+        data = json.loads(text, object_pairs_hook=_pairs_no_duplicates)
     except json.JSONDecodeError as error:
         raise ValidationError("JSON_INVALID") from error
     _scan_structure(data)
@@ -183,16 +207,18 @@ def read_csv_text(path: Path | str) -> str:
 
     local_path = Path(path)
     _check_local_file(local_path, ".csv")
-    try:
-        return local_path.read_text(encoding="utf-8-sig")
-    except UnicodeDecodeError as error:
-        raise ValidationError("INPUT_NOT_UTF8") from error
+    return _race_free_read(local_path, ".csv", encoding="utf-8-sig")
 
 
 def write_json(
     value: dict[str, Any], output: Path | None, *, force: bool = False
 ) -> None:
-    """Write deterministic JSON locally or print it to standard output."""
+    """Write deterministic JSON locally or print it to standard output.
+
+    Same codes and check order as before. The actual write is now race-free and,
+    with `force=True`, atomic (temp file + `os.replace`) instead of a plain
+    `write_text` that could leave a reader observing a half-written file.
+    """
 
     rendered = json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
     if len(rendered.encode("utf-8")) > MAX_OUTPUT_BYTES:
@@ -208,7 +234,11 @@ def write_json(
         raise ValidationError("OUTPUT_EXISTS")
     if not output.parent.exists() or not output.parent.is_dir():
         raise ValidationError("OUTPUT_PARENT_NOT_FOUND")
-    output.write_text(rendered, encoding="utf-8")
+    try:
+        safe_io.write_json(output, value, force=force)
+    except safe_io.SafeIOError as exc:
+        # The checks above just passed; only a race reaches here.
+        raise ValidationError("OUTPUT_NOT_WRITABLE") from exc
 
 
 def failure_report(error: ValidationError) -> dict[str, Any]:
@@ -863,9 +893,7 @@ def require_valid(issues: Iterable[Issue]) -> None:
 
 
 def rounded(value: float | None) -> float | None:
-    if value is None:
-        return None
-    return round(value, 6)
+    return safe_io.rounded(value)
 
 
 def weights_by_criterion(rubric: dict[str, Any]) -> dict[str, float]:
