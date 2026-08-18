@@ -12,6 +12,10 @@ permissions:
 
 jobs:
   release:
-    uses: AlveeeRahman/skill-vision/.github/workflows/reusable-release.yml@eec89f0e2e3af4402b842b02900a022538c19f6e
+    # Pinned by full SHA on purpose. Moved to 981723b because the previous
+    # pin (eec89f0) ran script_tester as a bare command under `bash -e`, so an
+    # exit-2 PARTIAL aborted the step before the tolerance branch could run and
+    # the release failed. 981723b uses `|| code=$?` and handles exit 2 properly.
+    uses: AlveeeRahman/skill-vision/.github/workflows/reusable-release.yml@981723b449fb0b02292671e3110964a2434dacd2
     with:
       skill_name: research-hound
