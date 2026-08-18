@@ -1,0 +1,12 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    uses: AlveeeRahman/skill-vision/.github/workflows/reusable-release.yml@eec89f0
+    with:
+      skill_name: research-hound
