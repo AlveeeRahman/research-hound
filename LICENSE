@@ -3,15 +3,6 @@ MIT License
 Copyright (c) 2026 MrPirate
 Copyright (c) 2025 K-Dense AI
 
-This package is composed from six skills in K-Dense AI's scientific-agent-skills
-repository (MIT): scientific-critical-thinking, literature-review,
-scientific-brainstorming, scientific-schematics, scientific-writing, and
-scholar-evaluation. The guide and reference bodies under guides/, references/,
-scripts/ and assets/ are derived from those originals and remain under their
-upstream copyright, retained here as MIT requires. The composition, routing,
-SKILL.md, and local additions are copyright the first holder above. Both are
-offered under the same MIT terms below.
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights

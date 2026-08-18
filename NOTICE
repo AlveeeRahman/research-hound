@@ -1,0 +1,26 @@
+research-hound
+Copyright (c) 2026 MrPirate
+
+This package is composed from six skills in K-Dense AI's scientific-agent-skills
+repository (https://github.com/K-Dense-AI/scientific-agent-skills), licensed MIT:
+
+  scientific-critical-thinking
+  literature-review
+  scientific-brainstorming
+  scientific-schematics
+  scientific-writing
+  scholar-evaluation
+
+Copyright (c) 2025 K-Dense AI
+
+The guide and reference bodies under guides/, references/, scripts/ and assets/
+are derived from those originals and remain under their upstream copyright,
+retained here as the MIT license requires. The composition, the routing in
+SKILL.md, and the local additions are copyright the first holder above.
+
+Both are offered under the same MIT terms, reproduced in full in LICENSE.
+
+This file exists separately from LICENSE so that LICENSE stays a verbatim copy of
+the MIT template. Attribution prose inside LICENSE prevents GitHub's license
+detection from matching it, and the repository is then reported as "Other"
+instead of MIT.

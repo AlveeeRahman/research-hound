@@ -192,6 +192,6 @@ Composed from six skills in [K-Dense AI's `scientific-agent-skills`](https://git
 `scientific-critical-thinking`, `literature-review`, `scientific-brainstorming`,
 `scientific-schematics`, `scientific-writing`, and `scholar-evaluation`. The guide and
 reference bodies are derived from those originals and carry their upstream copyright,
-retained in [LICENSE](LICENSE) as MIT requires.
+retained in [LICENSE](LICENSE) and detailed in [NOTICE](NOTICE) as MIT requires.
 
 *May your citations always resolve on the first fetch.*
