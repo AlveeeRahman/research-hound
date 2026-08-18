@@ -1,5 +1,18 @@
 # Transparent Idea Evaluation
 
+## Contents
+
+- [Define criteria before viewing scores](#define-criteria-before-viewing-scores)
+- [Rating process](#rating-process)
+- [Weighted additive matrix](#weighted-additive-matrix)
+- [Interpreting sensitivity](#interpreting-sensitivity)
+- [Adversarial review template](#adversarial-review-template)
+- [Literature check](#literature-check)
+- [Feasibility and rigor gate](#feasibility-and-rigor-gate)
+- [Ethics, safety, and regulatory gate](#ethics-safety-and-regulatory-gate)
+- [Decision log](#decision-log)
+- [Preregistration and open science handoff](#preregistration-and-open-science-handoff)
+
 Evaluation narrows a candidate set; it does not convert ideas into evidence.
 Use explicit criteria, independent ratings, uncertainty, qualitative review,
 adversarial checks, and noncompensatory gates.

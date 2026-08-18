@@ -1,5 +1,23 @@
 # Common Statistical Pitfalls
 
+## Contents
+
+- [P-Value Misinterpretations](#p-value-misinterpretations)
+- [Multiple Comparisons Problems](#multiple-comparisons-problems)
+- [Sample Size and Power Issues](#sample-size-and-power-issues)
+- [Effect Size Misunderstandings](#effect-size-misunderstandings)
+- [Correlation and Causation](#correlation-and-causation)
+- [Regression and Modeling Pitfalls](#regression-and-modeling-pitfalls)
+- [Specific Test Misuses](#specific-test-misuses)
+- [Confidence Interval Misinterpretations](#confidence-interval-misinterpretations)
+- [Bayesian vs. Frequentist Confusions](#bayesian-vs-frequentist-confusions)
+- [Data Transformation Issues](#data-transformation-issues)
+- [Missing Data Problems](#missing-data-problems)
+- [Publication and Reporting Issues](#publication-and-reporting-issues)
+- [Cross-Validation and Generalization](#cross-validation-and-generalization)
+- [Meta-Analysis Pitfalls](#meta-analysis-pitfalls)
+- [General Best Practices](#general-best-practices)
+
 ## P-Value Misinterpretations
 
 ### Pitfall 1: P-Value = Probability Hypothesis is True

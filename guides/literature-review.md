@@ -2,6 +2,19 @@
 
 > Sub-guide of the `research` skill. Adapted from the K-Dense AI `literature-review` skill (MIT). Multi-database search, citation verification, and synthesis. Scripts under `scripts/literature-review/`, template under `assets/literature-review/`.
 
+## Contents
+
+- [Overview](#overview)
+- [When to Use This Skill](#when-to-use-this-skill)
+- [Visual Enhancement with Scientific Schematics](#visual-enhancement-with-scientific-schematics)
+- [Core Workflow](#core-workflow)
+- [Best Practices](#best-practices)
+- [Common Pitfalls to Avoid](#common-pitfalls-to-avoid)
+- [Integration with Other Skills](#integration-with-other-skills)
+- [Resources](#resources)
+- [Dependencies](#dependencies)
+- [Summary](#summary)
+
 ## Overview
 
 Conduct systematic, comprehensive literature reviews following rigorous academic methodology. Search multiple literature databases, synthesize findings thematically, verify all citations for accuracy, and generate professional output documents in markdown and PDF formats.

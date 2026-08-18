@@ -1,5 +1,18 @@
 # Logical Fallacies in Scientific Discourse
 
+## Contents
+
+- [Fallacies of Causation](#fallacies-of-causation)
+- [Fallacies of Generalization](#fallacies-of-generalization)
+- [Fallacies of Authority and Tradition](#fallacies-of-authority-and-tradition)
+- [Fallacies of Relevance](#fallacies-of-relevance)
+- [Fallacies of Structure](#fallacies-of-structure)
+- [Fallacies of Statistical and Scientific Reasoning](#fallacies-of-statistical-and-scientific-reasoning)
+- [Fallacies of Scope and Definition](#fallacies-of-scope-and-definition)
+- [Fallacies Specific to Science](#fallacies-specific-to-science)
+- [Avoiding Logical Fallacies](#avoiding-logical-fallacies)
+- [Remember](#remember)
+
 ## Fallacies of Causation
 
 ### 1. Post Hoc Ergo Propter Hoc (After This, Therefore Because of This)

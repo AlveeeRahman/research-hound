@@ -1,5 +1,17 @@
 # Local CLI Reference
 
+## Contents
+
+- [Scaffold](#scaffold)
+- [Manifest validation](#manifest-validation)
+- [Reporting-guideline routing and coverage](#reporting-guideline-routing-and-coverage)
+- [Claim and citation audit](#claim-and-citation-audit)
+- [Numeric and methods-results consistency](#numeric-and-methods-results-consistency)
+- [Reference identifiers and duplicates](#reference-identifiers-and-duplicates)
+- [Authorship and disclosure](#authorship-and-disclosure)
+- [Language, placeholder, and confidentiality lint](#language-placeholder-and-confidentiality-lint)
+- [Exit behavior](#exit-behavior)
+
 All bundled commands use only the Python standard library. They:
 
 - accept explicit UTF-8 JSON, CSV, or Markdown files;

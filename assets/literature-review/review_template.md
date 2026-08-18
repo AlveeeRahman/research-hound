@@ -1,5 +1,20 @@
 # [Literature Review Title]
 
+## Contents
+
+- [Abstract](#abstract)
+- [1. Introduction](#1-introduction)
+- [2. Methodology](#2-methodology)
+- [3. Results](#3-results)
+- [4. Discussion](#4-discussion)
+- [5. Conclusions](#5-conclusions)
+- [6. Declarations](#6-declarations)
+- [7. References](#7-references)
+- [8. Appendices](#8-appendices)
+- [9. Supplementary Materials](#9-supplementary-materials)
+- [Review Metadata](#review-metadata)
+- [Usage Notes](#usage-notes)
+
 **Authors**: [Author Names and Affiliations]
 **Date**: [Date]
 **Review Type**: [Narrative / Systematic / Scoping / Meta-Analysis / Umbrella Review]

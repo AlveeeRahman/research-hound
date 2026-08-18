@@ -1,5 +1,15 @@
 # Sources and Evidence Notes
 
+## Contents
+
+- [Group brainstorming, blocking, fixation, and selection](#group-brainstorming-blocking-fixation-and-selection)
+- [Nominal groups, Delphi, and structured elicitation](#nominal-groups-delphi-and-structured-elicitation)
+- [Rigor, reproducibility, and sex as a biological variable](#rigor-reproducibility-and-sex-as-a-biological-variable)
+- [Preregistration and open science](#preregistration-and-open-science)
+- [Responsible AI and research integrity](#responsible-ai-and-research-integrity)
+- [Dual-use and responsible life sciences](#dual-use-and-responsible-life-sciences)
+- [Research method](#research-method)
+
 Research cut-off: **2026-07-23**. All links were checked on that date with
 Parallel web search and focused extraction. Dates below are publication,
 release, or page-update dates shown by the source. Source excerpts were treated

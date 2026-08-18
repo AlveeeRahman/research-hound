@@ -28,11 +28,13 @@ import time
 from pathlib import Path
 from typing import Optional, Dict, Any, List, NamedTuple
 
+# Deferred rather than fatal at import time. Exiting here meant `--help` could not
+# run on a machine without the dependency, so the one command that would have told
+# you what to install was the one command that could not execute.
 try:
     import requests
 except ImportError:
-    print("Error: requests library not found. Install with: uv pip install requests")
-    sys.exit(1)
+    requests = None
 
 
 class ReviewResult(NamedTuple):
@@ -901,7 +903,12 @@ Environment:
                        help="Verbose output")
     
     args = parser.parse_args()
-    
+
+    if requests is None:
+        print("Error: requests library not found. Install with: uv pip install requests",
+              file=sys.stderr)
+        sys.exit(1)
+
     # Check for API key — resolves --api-key, the environment, then any .env file
     api_key = _resolve_api_key(args.api_key)
     if not api_key:

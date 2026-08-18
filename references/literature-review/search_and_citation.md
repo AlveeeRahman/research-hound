@@ -1,5 +1,18 @@
 # Database Search Guidance and Citation Styles
 
+## Contents
+
+- [PubMed / PubMed Central](#pubmed-pubmed-central)
+- [bioRxiv / medRxiv](#biorxiv-medrxiv)
+- [arXiv](#arxiv)
+- [Semantic Scholar](#semantic-scholar)
+- [Specialized Biomedical Databases](#specialized-biomedical-databases)
+- [Citation Chaining](#citation-chaining)
+- [APA (7th Edition)](#apa-7th-edition)
+- [Nature](#nature)
+- [Vancouver](#vancouver)
+- [Prioritizing High-Impact Papers (CRITICAL)](#prioritizing-high-impact-papers-critical)
+
 Per-database search guidance (coverage, syntax, and export paths) followed by the
 citation style guide. See also `database_strategies.md` and `citation_styles.md`.
 

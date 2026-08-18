@@ -2,6 +2,17 @@
 
 > Sub-guide of the `research` skill. Adapted from the K-Dense AI `scholar-evaluation` skill. Rubric-based scholarly assessment with traceability. Scripts under `scripts/evaluation/`, templates under `assets/evaluation/`.
 
+## Contents
+
+- [Purpose](#purpose)
+- [Hard safety boundary](#hard-safety-boundary)
+- [ScholarEval status](#scholareval-status)
+- [Metric and prestige policy](#metric-and-prestige-policy)
+- [Data boundary](#data-boundary)
+- [Workflow](#workflow)
+- [Interpretation rules](#interpretation-rules)
+- [Bundled resources](#bundled-resources)
+
 ## Purpose
 
 Provide developmental, evidence-traceable feedback on a **scholarly work**:

@@ -1,5 +1,18 @@
 # Local Deterministic Tooling
 
+## Contents
+
+- [Security properties](#security-properties)
+- [Templates](#templates)
+- [1. Rubric schema validation](#1-rubric-schema-validation)
+- [2. Bounded descriptive scoring](#2-bounded-descriptive-scoring)
+- [3. Evidence traceability](#3-evidence-traceability)
+- [4. Weight sensitivity and rank instability](#4-weight-sensitivity-and-rank-instability)
+- [5. Inter-rater agreement summaries](#5-inter-rater-agreement-summaries)
+- [6. Bias and process checklist](#6-bias-and-process-checklist)
+- [7. Report scaffold](#7-report-scaffold)
+- [Exit behavior](#exit-behavior)
+
 ## Security properties
 
 Every bundled script:

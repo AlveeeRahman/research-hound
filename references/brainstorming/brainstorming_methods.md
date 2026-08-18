@@ -1,5 +1,17 @@
 # Brainstorming and Elicitation Methods
 
+## Contents
+
+- [Choose by purpose](#choose-by-purpose)
+- [Independent-then-interactive generation](#independent-then-interactive-generation)
+- [Nominal group technique](#nominal-group-technique)
+- [Delphi](#delphi)
+- [Structured expert elicitation](#structured-expert-elicitation)
+- [Divergence and convergence](#divergence-and-convergence)
+- [Generative prompt families](#generative-prompt-families)
+- [Method combinations](#method-combinations)
+- [Stop conditions](#stop-conditions)
+
 Use methods as fit-for-purpose process choices, not creativity guarantees. The
 best-supported finding in classic laboratory work is narrow: interacting
 face-to-face groups often produce fewer nonredundant ideas than the pooled

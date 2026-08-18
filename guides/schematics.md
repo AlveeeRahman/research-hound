@@ -2,6 +2,22 @@
 
 > Sub-guide of the `research` skill. Adapted from the K-Dense AI `scientific-schematics` skill. Diagram generation and refinement. Scripts under `scripts/schematics/`.
 
+## Contents
+
+- [Overview](#overview)
+- [Quick Start: Generate Any Diagram](#quick-start-generate-any-diagram)
+- [When to Use This Skill](#when-to-use-this-skill)
+- [How to Use This Skill](#how-to-use-this-skill)
+- [Smart Iterative Refinement, Advanced Usage, and Examples](#smart-iterative-refinement-advanced-usage-and-examples)
+- [Command-Line Usage](#command-line-usage)
+- [Best Practices Summary](#best-practices-summary)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
+- [Resources and References](#resources-and-references)
+- [Integration with Other Skills](#integration-with-other-skills)
+- [Quick Reference Checklist](#quick-reference-checklist)
+- [Environment Setup](#environment-setup)
+- [Getting Started](#getting-started)
+
 # Scientific Schematics and Diagrams
 
 ## Overview

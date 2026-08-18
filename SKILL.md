@@ -1,11 +1,11 @@
 ---
 name: research-hound
-description: Six-stage scientific research workflow - critical thinking (interrogate a question, appraise evidence, spot bias and statistical misuse), literature review (multi-database search across PubMed/arXiv/Semantic Scholar, synthesis, citation verification), brainstorming (ideation with scored triage), schematics (diagrams), writing (IMRaD drafting, claim-evidence tracing, manuscript linting, CONSORT/PRISMA/STROBE checklists), and evaluation (rubric scoring, inter-rater agreement, traceability). Use for academic or scientific work - framing a research question, searching or synthesising literature, systematic reviews and meta-analyses, critiquing a study design, generating hypotheses, drafting a paper, thesis or grant, making figures, checking citations, peer-reviewing, or scoring against a rubric - including when only an artifact is named (my methods section, reviewer 2 says, is this p-hacking, what has been published on X).
-license: See upstream K-Dense AI scientific-agent-skills
-allowed-tools: Read Write Edit Bash
-compatibility: Python 3.10+ for the bundled scripts. All run offline on the standard library except two, which need the requests package (uv pip install requests) - scripts/literature-review/verify_citations.py, which queries DOI resolvers and imports requests unguarded, and scripts/schematics/generate_schematic_ai.py, which also needs OPENROUTER_API_KEY and sends prompts to a third-party API. scripts/schematics/generate_schematic.py is the offline diagram alternative.
+description: Six-stage scientific research workflow - critical thinking (appraise evidence, spot bias and statistical misuse), literature review (PubMed/arXiv/Semantic Scholar search, synthesis, citation verification), brainstorming (scored idea triage), schematics (diagrams), writing (IMRaD, claim-evidence tracing, CONSORT/PRISMA/STROBE checklists), and evaluation (rubric scoring, inter-rater agreement). Use for academic work - framing a research question, systematic reviews and meta-analyses, critiquing a study design, drafting a paper or grant, checking citations, peer review - including when only the artifact is named (my methods section, reviewer 2 says, is this p-hacking).
+license: MIT (upstream K-Dense-AI/scientific-agent-skills, MIT)
+allowed-tools: Read Edit Write Bash(python3 scripts/*)
+compatibility: Python 3.10+. Scripts run offline on the standard library except three. scripts/literature-review/verify_citations.py needs requests and queries DOI resolvers. Both schematics generators - generate_schematic.py and generate_schematic_ai.py - need requests plus an OPENROUTER_API_KEY and send your prompt to a third-party API; generate_schematic.py is a wrapper that runs the AI one, not an offline alternative. For a diagram with no external call, write Mermaid inline instead.
 metadata:
-  version: "1.1"
+  version: "1.1.1"
   composed-from: "scientific-critical-thinking, literature-review, scientific-brainstorming, scientific-schematics, scientific-writing, scholar-evaluation (K-Dense AI)"
 ---
 
@@ -43,12 +43,17 @@ far more of the person's time than a misjudged single stage.
 
 | Stage | Read | You are here when |
 | ----- | ---- | ----------------- |
-| **1. Critical thinking** | `guides/critical-thinking.md` | Framing a question, appraising evidence quality, critiquing a design, checking for bias, fallacy, or statistical misuse |
-| **2. Literature review** | `guides/literature-review.md` | Searching PubMed/arXiv/Semantic Scholar, systematic review or meta-analysis, synthesising prior work, verifying citations, establishing the gap |
-| **3. Brainstorming** | `guides/brainstorming.md` | Generating hypotheses or study designs, running structured ideation, triaging many ideas down to a few |
-| **4. Schematics** | `guides/schematics.md` | Drawing a mechanism, flowchart, pipeline, or study-flow figure; refining a diagram |
-| **5. Writing** | `guides/writing.md` | Drafting or revising IMRaD sections, tracing claims to evidence, citations, reporting checklists, authorship |
-| **6. Evaluation** | `guides/evaluation.md` | Peer review, rubric scoring, inter-rater agreement, grant or submission assessment, traceability audits |
+| **1. Critical thinking** | [guides/critical-thinking.md](guides/critical-thinking.md) | Framing a question, appraising evidence quality, critiquing a design, checking for bias, fallacy, or statistical misuse |
+| **2. Literature review** | [guides/literature-review.md](guides/literature-review.md) | Searching PubMed/arXiv/Semantic Scholar, systematic review or meta-analysis, synthesising prior work, verifying citations, establishing the gap |
+| **3. Brainstorming** | [guides/brainstorming.md](guides/brainstorming.md) | Generating hypotheses or study designs, running structured ideation, triaging many ideas down to a few |
+| **4. Schematics** | [guides/schematics.md](guides/schematics.md) | Drawing a mechanism, flowchart, pipeline, or study-flow figure; refining a diagram |
+| **5. Writing** | [guides/writing.md](guides/writing.md) | Drafting or revising IMRaD sections, tracing claims to evidence, citations, reporting checklists, authorship |
+| **6. Evaluation** | [guides/evaluation.md](guides/evaluation.md) | Peer review, rubric scoring, inter-rater agreement, grant or submission assessment, traceability audits |
+
+Start at the guide. It carries the stage's workflow and names the reference files that
+matter for the step you are on. The index below exists so any one of them can also be
+opened in a single step — a file reached only through another file tends to get skimmed
+rather than read to the end.
 
 **Why literature review sits at stage 2.** Brainstorming before searching the literature
 generates ideas that are already published, and the cost of finding that out is measured in
@@ -114,47 +119,63 @@ third-party API, and journal policies on AI assistance are covered in stage 4
 anything, and never send unpublished sensitive material to an external API without
 deciding that is appropriate.
 
-## What's bundled
+## Reference index
 
-```
-research/
-├── guides/           # one per stage — start here
-├── references/
-│   ├── critical-thinking/  # scientific method, evidence hierarchy, experimental design,
-│   │                       # logical fallacies, common biases, statistical pitfalls
-│   ├── literature-review/  # core workflow, database strategies, search & citation,
-│   │                       # citation styles, worked example
-│   ├── brainstorming/      # methods, facilitation workflows, idea evaluation, responsible AI
-│   ├── schematics/         # best practices, iterative refinement
-│   ├── writing/            # IMRaD, citation styles, figures/tables, reporting guidelines,
-│   │                       # journal policies, integrity/open science, source ledger, CLI
-│   └── evaluation/         # evaluation framework, responsible assessment, security validation
-├── scripts/
-│   ├── literature-review/  # multi-database search, citation verification, PDF generation
-│   ├── brainstorming/      # session scaffold, register validation, scored matrix
-│   ├── schematics/         # deterministic + AI diagram generation
-│   ├── writing/            # scaffold, lint, claim audit, reference/consistency checks,
-│   │                       # authorship + manifest validation, guideline selection
-│   └── evaluation/         # rubric validation, scoring, agreement, traceability,
-│                           # weight sensitivity, report scaffold
-└── assets/
-    ├── literature-review/  # review document template
-    ├── writing/            # manuscript scaffold + manifest/claim/authorship templates
-    └── evaluation/         # rubric, ratings, evidence manifest, checklist templates
-```
+Every reference file, linked directly. Open the one you need; do not read a stage's whole
+folder.
+
+- **critical-thinking** — [common_biases](references/critical-thinking/common_biases.md) · [core_capabilities](references/critical-thinking/core_capabilities.md) · [evidence_hierarchy](references/critical-thinking/evidence_hierarchy.md) · [experimental_design](references/critical-thinking/experimental_design.md) · [logical_fallacies](references/critical-thinking/logical_fallacies.md) · [scientific_method](references/critical-thinking/scientific_method.md) · [statistical_pitfalls](references/critical-thinking/statistical_pitfalls.md)
+- **literature-review** — [citation_styles](references/literature-review/citation_styles.md) · [core_workflow](references/literature-review/core_workflow.md) · [database_strategies](references/literature-review/database_strategies.md) · [example_workflow](references/literature-review/example_workflow.md) · [search_and_citation](references/literature-review/search_and_citation.md)
+- **brainstorming** — [brainstorming_methods](references/brainstorming/brainstorming_methods.md) · [facilitation_workflows](references/brainstorming/facilitation_workflows.md) · [idea_evaluation](references/brainstorming/idea_evaluation.md) · [responsible_ai](references/brainstorming/responsible_ai.md) · [sources](references/brainstorming/sources.md)
+- **schematics** — [best_practices](references/schematics/best_practices.md) · [iterative_refinement](references/schematics/iterative_refinement.md)
+- **writing** — [authorship_ai_confidentiality](references/writing/authorship_ai_confidentiality.md) · [citation_styles](references/writing/citation_styles.md) · [cli_reference](references/writing/cli_reference.md) · [evidence_workflow](references/writing/evidence_workflow.md) · [figures_tables](references/writing/figures_tables.md) · [imrad_structure](references/writing/imrad_structure.md) · [journal_policies](references/writing/journal_policies.md) · [professional_report_formatting](references/writing/professional_report_formatting.md) · [reporting_guidelines](references/writing/reporting_guidelines.md) · [research_integrity_open_science](references/writing/research_integrity_open_science.md) · [source_ledger](references/writing/source_ledger.md) · [writing_principles](references/writing/writing_principles.md)
+- **evaluation** — [evaluation_framework](references/evaluation/evaluation_framework.md) · [local_tooling](references/evaluation/local_tooling.md) · [responsible_assessment](references/evaluation/responsible_assessment.md) · [security_validation](references/evaluation/security_validation.md) · [source_ledger](references/evaluation/source_ledger.md)
+
+Templates to copy and fill:
+
+- **literature-review** — [review_template.md](assets/literature-review/review_template.md)
+- **writing** — [REPORT_FORMATTING_GUIDE.md](assets/writing/REPORT_FORMATTING_GUIDE.md) · [authorship_template.json](assets/writing/authorship_template.json) · [claim_evidence_template.csv](assets/writing/claim_evidence_template.csv) · [consistency_manifest_template.json](assets/writing/consistency_manifest_template.json) · [manuscript_manifest_template.json](assets/writing/manuscript_manifest_template.json) · [manuscript_scaffold.md](assets/writing/manuscript_scaffold.md) · [reporting_coverage_template.json](assets/writing/reporting_coverage_template.json) · [reporting_guidelines.json](assets/writing/reporting_guidelines.json) · [source_manifest_template.json](assets/writing/source_manifest_template.json)
+- **evaluation** — [evaluation_template.json](assets/evaluation/evaluation_template.json) · [evidence_manifest_template.json](assets/evaluation/evidence_manifest_template.json) · [process_checklist_template.json](assets/evaluation/process_checklist_template.json) · [ratings_template.csv](assets/evaluation/ratings_template.csv) · [rubric_template.json](assets/evaluation/rubric_template.json)
+
+Scripts are run, not read — one directory per stage under `scripts/`:
+literature-review (multi-database search, citation verification, PDF generation),
+brainstorming (session scaffold, register validation, scored matrix), schematics
+(diagram generation), writing (scaffold, lint, claim audit, reference and consistency
+checks, authorship and manifest validation, guideline selection), evaluation (rubric
+validation, scoring, agreement, traceability, weight sensitivity, report scaffold).
 
 Each `scripts/<stage>/` directory contains its own `_common.py`; the three are different
 modules and must stay beside their siblings — they are imported by the scripts around
 them, not run directly.
 
-Every script exposes `--help` and runs offline on the standard library, with one
-exception: `scripts/schematics/generate_schematic_ai.py` needs `requests`
-(`uv pip install requests`) and an `OPENROUTER_API_KEY`, and transmits your prompt to a
-third-party service. It exits with an install hint rather than a traceback if `requests`
-is absent. `scripts/schematics/generate_schematic.py` is the offline alternative.
-
 Stage 1 ships no scripts by design — appraising a question is judgement, and a tool that
 scored it would invite exactly the false precision the stage exists to prevent.
+
+### What leaves the machine
+
+Every script exposes `--help` and runs offline on the standard library, with three
+exceptions: `scripts/literature-review/verify_citations.py`,
+`scripts/schematics/generate_schematic_ai.py`, and
+`scripts/schematics/generate_schematic.py`. Check this list before passing anything
+unpublished to a script.
+
+| Script | Needs | Sends your data where |
+| --- | --- | --- |
+| `scripts/literature-review/verify_citations.py` | `requests` | DOI resolvers (Crossref, DataCite) — the identifiers you are checking |
+| `scripts/schematics/generate_schematic_ai.py` | `requests`, `OPENROUTER_API_KEY` | OpenRouter, a third-party API — your full prompt |
+| `scripts/schematics/generate_schematic.py` | `requests`, `OPENROUTER_API_KEY` | OpenRouter — it is a thin wrapper that runs `generate_schematic_ai.py` |
+
+**There is no offline image generator in this skill.** `generate_schematic.py` reads like
+an offline alternative and is not one: it resolves the API key (from `--api-key`, the
+environment, or a `.env` file), exits if there is none, and hands the prompt to
+`generate_schematic_ai.py`. Earlier revisions of this file described it as the offline
+path. That was wrong.
+
+For a diagram that never leaves the machine, write Mermaid inline in your reply — Claude
+Code and claude.ai both render a ` ```mermaid ` block, which covers flowcharts, study-flow
+and CONSORT diagrams, and most mechanism figures. Reach for the OpenRouter generator only
+when you need a raster image for a manuscript, and disclose the AI assistance per
+[references/writing/authorship_ai_confidentiality.md](references/writing/authorship_ai_confidentiality.md).
 
 ## Attribution
 

@@ -76,7 +76,16 @@ transmission nor create a missing-file fallback. The generated root
 
 ## Reproduction
 
+> **These are not commands for this package.** The scan above was run in K-Dense AI's
+> upstream `scientific-agent-skills` repository, against its `scholar-evaluation` skill,
+> using that repository's tooling (`skills-ref`, `skill-scanner`, `scan_pr_skills.py`).
+> None of those tools, and no `skills/` directory, ship here. The block is kept verbatim
+> so the finding above is traceable to how it was produced.
+
+<!-- claim-audit: ignore-next-block -->
+
 ```bash
+# Upstream repository (K-Dense AI scientific-agent-skills) — not runnable here:
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover \
   -s tests/scholar-evaluation -p 'test_*.py' -v
 
@@ -85,11 +94,18 @@ for script in skills/scholar-evaluation/scripts/evaluation/*.py; do
 done
 
 uv run skills-ref validate skills/scholar-evaluation
-
 uv run skill-scanner scan skills/scholar-evaluation --use-behavioral
-
 uv run python scan_pr_skills.py \
   --fail-on HIGH \
   --output /tmp/scholar-evaluation-pr-scan.md \
   skills/scholar-evaluation
+```
+
+To check *this* package instead, every evaluation script answers `--help`, and the
+equivalent local sweep is:
+
+```bash
+for script in scripts/evaluation/*.py; do
+  python3 "$script" --help >/dev/null || exit 1
+done
 ```

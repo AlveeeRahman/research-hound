@@ -125,8 +125,30 @@ def check_dependencies():
 
     return True
 
+USAGE = """Usage: python3 generate_pdf.py <markdown_file> [output_pdf] [options]
+
+Render a markdown review document to PDF.
+
+Options:
+  --citation-style STYLE    Citation style (default: apa)
+  --no-toc                  Disable table of contents
+  --no-numbers              Disable section numbering
+  --check-deps              Check if dependencies are installed
+  -h, --help                Show this message and exit
+
+Exit codes:
+  0  rendered, or --help/--check-deps completed
+  1  missing arguments, unreadable input, or a rendering failure"""
+
+
 def main():
     """Command-line interface."""
+    # Handled before anything positional: without this, `--help` was read as the
+    # markdown filename and the script died looking for a file named "--help".
+    if any(a in ("-h", "--help") for a in sys.argv[1:]):
+        print(USAGE)
+        sys.exit(0)
+
     if len(sys.argv) < 2:
         print("Usage: python generate_pdf.py <markdown_file> [output_pdf] [--citation-style STYLE]")
         print("\nOptions:")

@@ -1,5 +1,17 @@
 # Literature Database Search Strategies
 
+## Contents
+
+- [Available Databases and Skills](#available-databases-and-skills)
+- [Search Strategy Framework](#search-strategy-framework)
+- [Search Execution Workflow](#search-execution-workflow)
+- [Search Documentation Template](#search-documentation-template)
+- [Advanced Search Techniques](#advanced-search-techniques)
+- [Quality Control Checklist](#quality-control-checklist)
+- [Common Pitfalls to Avoid](#common-pitfalls-to-avoid)
+- [Example Multi-Database Search Workflow](#example-multi-database-search-workflow)
+- [Resources](#resources)
+
 This document provides comprehensive guidance for searching multiple literature databases systematically and effectively.
 
 ## Available Databases and Skills
@@ -428,13 +440,13 @@ search_term = "CRISPR AND sickle cell disease"
 # Use semantic scholar API with search query
 
 # 5. Aggregate and deduplicate results
-# python search_databases.py combined_results.json --deduplicate --format markdown --output review_papers.md
+# python3 scripts/literature-review/search_databases.py combined_results.json --deduplicate --format markdown --output review_papers.md
 
 # 6. Verify all citations
-# python verify_citations.py review_papers.md
+# python3 scripts/literature-review/verify_citations.py review_papers.md
 
 # 7. Generate final PDF
-# python generate_pdf.py review_papers.md --citation-style nature
+# python3 scripts/literature-review/generate_pdf.py review_papers.md --citation-style nature
 ```
 
 ---

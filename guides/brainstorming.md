@@ -2,6 +2,15 @@
 
 > Sub-guide of the `research` skill. Adapted from the K-Dense AI `scientific-brainstorming` skill. Structured ideation with scored triage. Scripts under `scripts/brainstorming/`.
 
+## Contents
+
+- [Purpose and boundaries](#purpose-and-boundaries)
+- [Operating rules](#operating-rules)
+- [Reproducible workflow](#reproducible-workflow)
+- [Bias and failure controls](#bias-and-failure-controls)
+- [Optional local CLIs](#optional-local-clis)
+- [Reference index](#reference-index)
+
 ## Purpose and boundaries
 
 Use this skill to create, organize, challenge, and transparently prioritize

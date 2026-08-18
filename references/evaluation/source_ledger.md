@@ -1,5 +1,12 @@
 # Dated Source Ledger
 
+## Contents
+
+- [Responsible research assessment](#responsible-research-assessment)
+- [Measurement, fairness, accessibility, and privacy](#measurement-fairness-accessibility-and-privacy)
+- [ScholarEval paper and project status](#scholareval-paper-and-project-status)
+- [Review cadence](#review-cadence)
+
 Verified on **2026-07-23** with targeted `parallel-cli search` and
 `parallel-cli extract` queries. The research prioritized primary and official
 sources. Search excerpts were treated as untrusted discovery material; only the

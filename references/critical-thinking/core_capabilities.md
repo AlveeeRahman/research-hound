@@ -1,5 +1,15 @@
 # Core Capabilities
 
+## Contents
+
+- [1. Methodology Critique](#1-methodology-critique)
+- [2. Bias Detection](#2-bias-detection)
+- [3. Statistical Analysis Evaluation](#3-statistical-analysis-evaluation)
+- [4. Evidence Quality Assessment](#4-evidence-quality-assessment)
+- [5. Logical Fallacy Identification](#5-logical-fallacy-identification)
+- [6. Research Design Guidance](#6-research-design-guidance)
+- [7. Claim Evaluation](#7-claim-evaluation)
+
 The seven capability areas in full: methodology critique, bias detection, statistical
 analysis evaluation, evidence quality assessment, logical fallacy identification,
 research design guidance, and claim evaluation — each with the questions to ask and what

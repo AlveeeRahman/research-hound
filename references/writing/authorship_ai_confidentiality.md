@@ -1,5 +1,14 @@
 # Authorship, CRediT, AI, and Confidentiality
 
+## Contents
+
+- [Human authorship and accountability](#human-authorship-and-accountability)
+- [CRediT](#credit)
+- [AI-use disclosure](#ai-use-disclosure)
+- [Confidentiality boundary](#confidentiality-boundary)
+- [COPE status as of the research date](#cope-status-as-of-the-research-date)
+- [Validation](#validation)
+
 ## Human authorship and accountability
 
 Use the current target-journal authorship policy. For biomedical work, ICMJE's four

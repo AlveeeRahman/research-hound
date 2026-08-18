@@ -1,5 +1,27 @@
 # Experimental Design Checklist
 
+## Contents
+
+- [Research Question Formulation](#research-question-formulation)
+- [Hypothesis Development](#hypothesis-development)
+- [Study Design Selection](#study-design-selection)
+- [Variables](#variables)
+- [Sampling](#sampling)
+- [Blinding and Randomization](#blinding-and-randomization)
+- [Control Groups and Conditions](#control-groups-and-conditions)
+- [Procedures](#procedures)
+- [Measurement](#measurement)
+- [Bias Minimization](#bias-minimization)
+- [Data Management](#data-management)
+- [Statistical Analysis Planning](#statistical-analysis-planning)
+- [Ethical Considerations](#ethical-considerations)
+- [Validity Threats](#validity-threats)
+- [Reporting and Transparency](#reporting-and-transparency)
+- [Post-Study Considerations](#post-study-considerations)
+- [Common Pitfalls to Avoid](#common-pitfalls-to-avoid)
+- [Final Checklist Before Starting](#final-checklist-before-starting)
+- [Remember](#remember)
+
 ## Research Question Formulation
 
 ### Is the Question Well-Formed?

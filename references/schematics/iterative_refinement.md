@@ -1,5 +1,11 @@
 # Smart Iterative Refinement Workflow
 
+## Contents
+
+- [Smart Iterative Refinement Workflow](#smart-iterative-refinement-workflow)
+- [Advanced AI Generation Usage](#advanced-ai-generation-usage)
+- [AI Generation Examples](#ai-generation-examples)
+
 How the generate-review-refine loop works: the initial generation, the quality review,
 the decision to continue or stop, subsequent iterations, and the review log. Then the
 advanced generation options (Python API, command-line options, prompt engineering) and

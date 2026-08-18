@@ -2,6 +2,16 @@
 
 > Sub-guide of the `research` skill. Adapted from the K-Dense AI `scientific-critical-thinking` skill. Reasoning, evidence appraisal, and design critique. No scripts; this stage is judgement.
 
+## Contents
+
+- [Overview](#overview)
+- [When to Use This Skill](#when-to-use-this-skill)
+- [Visual Aids (Optional)](#visual-aids-optional)
+- [Core Capabilities](#core-capabilities)
+- [Application Guidelines](#application-guidelines)
+- [Reference Materials](#reference-materials)
+- [Remember](#remember)
+
 ## Overview
 
 Critical thinking is a systematic process for evaluating scientific rigor. Assess methodology, experimental design, statistical validity, biases, confounding, and evidence quality using GRADE and Cochrane ROB frameworks. Apply this skill for critical analysis of scientific claims.

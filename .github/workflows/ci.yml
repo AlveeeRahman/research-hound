@@ -28,3 +28,32 @@ jobs:
 
       - name: Self-validate against the Agent Skills spec
         run: python /tmp/skill-vision/scripts/spec_validator.py .
+
+      # Structure and truth are independent failures. A skill can conform to the spec
+      # and still document a flag its own parser does not define, or claim a script
+      # runs offline when it shells out to one that does not.
+      - name: Audit documentation claims against the code
+        run: python /tmp/skill-vision/scripts/claim_auditor.py .
+
+      - name: Bundled scripts run
+        run: |
+          # script_tester exits 2 for PARTIAL. `|| code=$?` is required: GitHub runs
+          # this under `bash -e`, so a bare failing command aborts the step before any
+          # exit-code branch can run.
+          code=0
+          python /tmp/skill-vision/scripts/script_tester.py . || code=$?
+          case "$code" in
+            0) echo "All bundled scripts passed." ;;
+            2) echo "::warning::script_tester reported PARTIAL (exit 2)" ;;
+            *) echo "::error::script_tester exited $code"; exit 1 ;;
+          esac
+
+      - name: Install the one third-party dependency the network scripts need
+        run: python -m pip install --quiet requests
+
+      - name: Every CLI answers --help
+        run: |
+          for script in $(find scripts -name '*.py' -not -name '_*'); do
+            python "$script" --help > /dev/null || {
+              echo "::error::$script has no working --help"; exit 1; }
+          done

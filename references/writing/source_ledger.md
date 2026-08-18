@@ -1,5 +1,13 @@
 # Source Ledger
 
+## Contents
+
+- [Publication ethics, authorship, and AI](#publication-ethics-authorship-and-ai)
+- [Reporting guidelines](#reporting-guidelines)
+- [Contributions and references](#contributions-and-references)
+- [Journal-policy examples](#journal-policy-examples)
+- [Research integrity and open science](#research-integrity-and-open-science)
+
 Research date: **2026-07-24**
 
 Method: targeted `parallel-cli search` and `parallel-cli extract` queries restricted to

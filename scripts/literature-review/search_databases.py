@@ -206,8 +206,32 @@ def generate_search_summary(results: List[Dict]) -> Dict:
 
     return summary
 
+USAGE = """Usage: python3 search_databases.py <results.json> [options]
+
+Process, filter, rank and re-format literature search results.
+
+Options:
+  --format FORMAT          Output format (json, markdown, bibtex)
+  --output FILE            Output file (default: stdout)
+  --rank CRITERIA          Rank by (citations, year, relevance)
+  --year-start YEAR        Filter by start year
+  --year-end YEAR          Filter by end year
+  --deduplicate            Remove duplicates
+  --summary                Show summary statistics
+  -h, --help               Show this message and exit
+
+Exit codes:
+  0  processed, or --help completed
+  1  missing arguments, or the results file could not be read"""
+
+
 def main():
     """Command-line interface for search result processing."""
+    # Before positional parsing: `--help` used to be taken as the results filename.
+    if any(a in ("-h", "--help") for a in sys.argv[1:]):
+        print(USAGE)
+        sys.exit(0)
+
     if len(sys.argv) < 2:
         print("Usage: python search_databases.py <results.json> [options]")
         print("\nOptions:")

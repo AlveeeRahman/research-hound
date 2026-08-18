@@ -1,5 +1,12 @@
 # Common Biases in Scientific Research
 
+## Contents
+
+- [Cognitive Biases Affecting Researchers](#cognitive-biases-affecting-researchers)
+- [Experimental and Methodological Biases](#experimental-and-methodological-biases)
+- [Statistical and Analysis Biases](#statistical-and-analysis-biases)
+- [Reducing Bias: Best Practices](#reducing-bias-best-practices)
+
 ## Cognitive Biases Affecting Researchers
 
 ### 1. Confirmation Bias

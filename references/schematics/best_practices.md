@@ -1,5 +1,20 @@
 # Best Practices for Scientific Diagrams
 
+## Contents
+
+- [Overview](#overview)
+- [Publication Standards](#publication-standards)
+- [Accessibility and Colorblindness](#accessibility-and-colorblindness)
+- [Design Principles](#design-principles)
+- [Common Pitfalls and Solutions](#common-pitfalls-and-solutions)
+- [Quality Control Checklist](#quality-control-checklist)
+- [Journal-Specific Guidelines](#journal-specific-guidelines)
+- [Software-Specific Export Settings](#software-specific-export-settings)
+- [Version Control Best Practices](#version-control-best-practices)
+- [Testing and Validation](#testing-and-validation)
+- [Summary: Golden Rules](#summary-golden-rules)
+- [Further Resources](#further-resources)
+
 ## Overview
 
 This guide provides publication standards, accessibility guidelines, and best practices for creating high-quality scientific diagrams that meet journal requirements and communicate effectively to all readers.

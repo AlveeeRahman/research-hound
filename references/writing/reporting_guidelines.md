@@ -1,5 +1,14 @@
 # Reporting-Guideline Selection and Coverage
 
+## Contents
+
+- [Purpose and limits](#purpose-and-limits)
+- [Current major guidance as researched](#current-major-guidance-as-researched)
+- [Selector](#selector)
+- [Coverage record](#coverage-record)
+- [Workflow](#workflow)
+- [Frequent errors](#frequent-errors)
+
 ## Purpose and limits
 
 Reporting guidelines help authors report study design, conduct, analysis, and findings

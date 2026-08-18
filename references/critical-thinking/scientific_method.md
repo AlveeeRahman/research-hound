@@ -1,5 +1,15 @@
 # Scientific Method Core Principles
 
+## Contents
+
+- [Fundamental Principles](#fundamental-principles)
+- [The Scientific Process](#the-scientific-process)
+- [Critical Evaluation Criteria](#critical-evaluation-criteria)
+- [Red Flags in Scientific Claims](#red-flags-in-scientific-claims)
+- [Standards for Causal Inference](#standards-for-causal-inference)
+- [Peer Review and Scientific Consensus](#peer-review-and-scientific-consensus)
+- [Open Science Principles](#open-science-principles)
+
 ## Fundamental Principles
 
 ### 1. Empiricism

@@ -1,5 +1,19 @@
 # Evaluation Framework
 
+## Contents
+
+- [What ScholarEval is—and is not](#what-scholareval-isand-is-not)
+- [Relationship to this skill](#relationship-to-this-skill)
+- [Five template criteria](#five-template-criteria)
+- [Scale semantics](#scale-semantics)
+- [Rating statuses](#rating-statuses)
+- [Transparent score math](#transparent-score-math)
+- [Rubric development record](#rubric-development-record)
+- [Rater protocol](#rater-protocol)
+- [Evidence traceability](#evidence-traceability)
+- [Weight sensitivity and order instability](#weight-sensitivity-and-order-instability)
+- [Interpretation template](#interpretation-template)
+
 ## What ScholarEval is—and is not
 
 The paper currently referenced by this skill is Moussa et al.,

@@ -5,8 +5,16 @@ Verifies DOIs, URLs, and citation metadata for accuracy.
 """
 
 import re
-import requests
 import json
+
+# Guarded so `--help` and any offline code path still work when requests is
+# absent. An unguarded import made the script die with a ModuleNotFoundError
+# traceback before it could tell the caller what was missing.
+try:
+    import requests
+except ImportError:  # pragma: no cover - exercised only without the dependency
+    requests = None
+
 from typing import Dict, List, Tuple
 from urllib.parse import urlparse
 import time
@@ -179,12 +187,39 @@ class CitationVerifier:
 
         return citation
 
+USAGE = """Usage: python3 verify_citations.py <markdown_file>
+
+Check that every citation in a markdown document resolves to a real record.
+
+Requires the `requests` package (uv pip install requests) and queries public DOI
+resolvers, so this script sends the identifiers it is checking over the network.
+
+Options:
+  -h, --help    Show this message and exit
+
+Exit codes:
+  0  every citation resolved, or --help completed
+  1  missing arguments, or `requests` is not installed
+  2  at least one citation could not be verified"""
+
+
 def main():
-    """Example usage."""
+    """Command-line interface."""
     import sys
 
+    # Answered before the dependency check, so `--help` still works on a machine
+    # that has never installed requests.
+    if any(a in ("-h", "--help") for a in sys.argv[1:]):
+        print(USAGE)
+        sys.exit(0)
+
     if len(sys.argv) < 2:
-        print("Usage: python verify_citations.py <markdown_file>")
+        print(USAGE)
+        sys.exit(1)
+
+    if requests is None:
+        print("Error: this script needs the requests package.", file=sys.stderr)
+        print("Install it with: uv pip install requests", file=sys.stderr)
         sys.exit(1)
 
     filepath = sys.argv[1]

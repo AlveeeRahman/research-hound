@@ -1,5 +1,15 @@
 # Manuscript Structure and Consistency
 
+## Contents
+
+- [Title and abstract](#title-and-abstract)
+- [Introduction](#introduction)
+- [Methods](#methods)
+- [Results](#results)
+- [Discussion](#discussion)
+- [Declarations and end matter](#declarations-and-end-matter)
+- [Cross-section audit](#cross-section-audit)
+
 IMRAD is a useful default for many original-research reports, but the study design,
 reporting guideline, article type, and current journal instructions control the final
 structure [SW-S01, SW-S06].

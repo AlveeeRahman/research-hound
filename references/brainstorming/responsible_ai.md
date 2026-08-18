@@ -1,5 +1,19 @@
 # Responsible AI in Research Ideation
 
+## Contents
+
+- [Default sequence](#default-sequence)
+- [Suitable bounded roles](#suitable-bounded-roles)
+- [Hallucination and source verification](#hallucination-and-source-verification)
+- [Anchoring and homogenization](#anchoring-and-homogenization)
+- [Automation bias and false authority](#automation-bias-and-false-authority)
+- [Confidentiality, privacy, and intellectual property](#confidentiality-privacy-and-intellectual-property)
+- [Bias, representation, and participation](#bias-representation-and-participation)
+- [Research integrity and disclosure](#research-integrity-and-disclosure)
+- [Dual-use and misuse review](#dual-use-and-misuse-review)
+- [Incident handling](#incident-handling)
+- [Evidence and policy basis](#evidence-and-policy-basis)
+
 AI can supply prompts, reframings, counterarguments, or organizational help.
 It is not an expert panel, evidence source, author, ethics reviewer, or
 scientific decision maker. Capabilities and policies change; follow current

@@ -1,5 +1,17 @@
 # Citation Styles Reference
 
+## Contents
+
+- [APA Style (7th Edition)](#apa-style-7th-edition)
+- [Nature Style](#nature-style)
+- [Chicago Style (Author-Date)](#chicago-style-author-date)
+- [Vancouver Style (Numbered)](#vancouver-style-numbered)
+- [IEEE Style](#ieee-style)
+- [Common Abbreviations for Journal Names](#common-abbreviations-for-journal-names)
+- [DOI Best Practices](#doi-best-practices)
+- [In-Text Citation Guidelines](#in-text-citation-guidelines)
+- [Reference List Organization](#reference-list-organization)
+
 This document provides detailed guidelines for formatting citations in various academic styles commonly used in literature reviews.
 
 ## APA Style (7th Edition)

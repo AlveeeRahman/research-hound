@@ -1,5 +1,18 @@
 # Responsible Assessment and Safety Boundary
 
+## Contents
+
+- [Non-negotiable boundary](#non-negotiable-boundary)
+- [Allowed scope](#allowed-scope)
+- [Accountable human process](#accountable-human-process)
+- [Qualitative-first evidence](#qualitative-first-evidence)
+- [Prohibited proxies and contextual indicators](#prohibited-proxies-and-contextual-indicators)
+- [Rubric evidence and psychometric caution](#rubric-evidence-and-psychometric-caution)
+- [Bias and subgroup review](#bias-and-subgroup-review)
+- [Privacy and data protection](#privacy-and-data-protection)
+- [Accessibility](#accessibility)
+- [Communicating results](#communicating-results)
+
 ## Non-negotiable boundary
 
 This skill is for **developmental review of scholarly works** and for auditing a

@@ -2,6 +2,17 @@
 
 > Sub-guide of the `research` skill. Adapted from the K-Dense AI `scientific-writing` skill. IMRaD drafting, claim-evidence tracing, and manuscript linting. Scripts under `scripts/writing/`, templates under `assets/writing/`.
 
+## Contents
+
+- [Purpose](#purpose)
+- [Non-negotiable safety rules](#non-negotiable-safety-rules)
+- [Intake](#intake)
+- [Workflow](#workflow)
+- [Revision and peer review](#revision-and-peer-review)
+- [Current policy caution](#current-policy-caution)
+- [Formatting and submission](#formatting-and-submission)
+- [Bundled files](#bundled-files)
+
 ## Purpose
 
 Produce clear scientific prose without inventing evidence or concealing uncertainty.

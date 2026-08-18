@@ -1,5 +1,15 @@
 # Core Workflow
 
+## Contents
+
+- [Phase 1: Planning and Scoping](#phase-1-planning-and-scoping)
+- [Phase 2: Systematic Literature Search](#phase-2-systematic-literature-search)
+- [Phase 3: Screening and Selection](#phase-3-screening-and-selection)
+- [Phase 4: Data Extraction and Quality Assessment](#phase-4-data-extraction-and-quality-assessment)
+- [Phase 5: Synthesis and Analysis](#phase-5-synthesis-and-analysis)
+- [Phase 6: Citation Verification](#phase-6-citation-verification)
+- [Phase 7: Document Generation](#phase-7-document-generation)
+
 All seven phases in full: planning and scoping, systematic search, screening and
 selection, data extraction and quality assessment, synthesis and analysis, citation
 verification, and document generation.
@@ -97,7 +107,7 @@ Literature reviews follow a structured, multi-phase workflow:
    - Combine all results into a single file
    - Use `scripts/literature-review/search_databases.py` for post-processing:
      ```bash
-     python search_databases.py combined_results.json \
+     python3 scripts/literature-review/search_databases.py combined_results.json \
        --deduplicate \
        --format markdown \
        --output aggregated_results.md
@@ -107,7 +117,7 @@ Literature reviews follow a structured, multi-phase workflow:
 
 1. **Deduplication**:
    ```bash
-   python search_databases.py results.json --deduplicate --output unique_results.json
+   python3 scripts/literature-review/search_databases.py results.json --deduplicate --output unique_results.json
    ```
    - Removes duplicates by DOI (primary) or title (fallback)
    - Document number of duplicates removed

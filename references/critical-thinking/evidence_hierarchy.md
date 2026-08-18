@@ -1,5 +1,18 @@
 # Evidence Hierarchy and Quality Assessment
 
+## Contents
+
+- [Traditional Evidence Hierarchy (Medical/Clinical)](#traditional-evidence-hierarchy-medicalclinical)
+- [Nuances and Limitations of Traditional Hierarchy](#nuances-and-limitations-of-traditional-hierarchy)
+- [Alternative: GRADE System](#alternative-grade-system)
+- [Study Quality Assessment Criteria](#study-quality-assessment-criteria)
+- [Critical Appraisal Tools](#critical-appraisal-tools)
+- [Domain-Specific Considerations](#domain-specific-considerations)
+- [Synthesizing Evidence Across Studies](#synthesizing-evidence-across-studies)
+- [Red Flags in Evidence Quality](#red-flags-in-evidence-quality)
+- [Practical Decision Framework](#practical-decision-framework)
+- [Communicating Evidence Strength](#communicating-evidence-strength)
+
 ## Traditional Evidence Hierarchy (Medical/Clinical)
 
 ### Level 1: Systematic Reviews and Meta-Analyses
