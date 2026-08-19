@@ -2,7 +2,7 @@
 
 Figures and tables are optional. Include a display only when it communicates verified
 evidence more clearly than prose and the target venue permits it. This skill does not
-generate images, schematics, graphical abstracts, or synthetic scientific visuals.
+generate images, diagrams, graphical abstracts, or synthetic scientific visuals.
 
 ## Provenance gate
 

@@ -232,7 +232,7 @@ conditions. See `references/writing/research_integrity_open_science.md`.
 ### 10. Use figures and tables only when warranted
 
 Figures and tables are optional and provenance-bound. This skill does not generate
-images or schematics.
+images or diagrams.
 
 For every retained display:
 

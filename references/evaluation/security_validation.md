@@ -11,12 +11,12 @@ severity **CRITICAL**:
 - three MEDIUM credential, prompt, and environment-harvesting findings; and
 - three LOW cross-skill, command, and resource-use findings.
 
-The affected files were the two former schematic-generation scripts and the
-old `SKILL.md`.
+The affected files were two image-generation scripts, since removed from this
+package entirely, and the old `SKILL.md`.
 
 ## Remediation
 
-- Deleted both schematic-generation scripts.
+- Deleted both image-generation scripts.
 - Removed all network requests, API-key handling, environment access,
   environment-file loading, third-party model behavior, image handling,
   child-process execution, cross-skill invocation, and mandatory figure
@@ -37,7 +37,7 @@ old `SKILL.md`.
   identifiers.
 - Added static AST tests that prohibit network libraries, dynamic-code calls,
   executable serialization, process launching, environment access, and the
-  deleted schematic files.
+  deleted files.
 
 ## Validation results
 

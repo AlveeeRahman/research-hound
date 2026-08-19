@@ -179,7 +179,3 @@ Composed from five skills in K-Dense AI's `scientific-agent-skills` repository:
 `scientific-critical-thinking`, `literature-review`, `scientific-brainstorming`,
 `scientific-writing`, and `scholar-evaluation`. Guide bodies are preserved from the
 originals with cross-reference paths updated for this layout.
-
-Upstream's `scientific-schematics` skill is deliberately not included. Its whole function
-was to send a diagram prompt to a hosted image model, which is not something this skill
-does.
