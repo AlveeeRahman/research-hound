@@ -5,7 +5,7 @@ license: MIT (upstream K-Dense-AI/scientific-agent-skills, MIT)
 allowed-tools: Read Edit Write Bash(python3 scripts/*)
 compatibility: "Python 3.10+. Every script runs offline on the standard library except one: scripts/literature-review/verify_citations.py needs requests and queries DOI resolvers to check that a reference resolves. Nothing else leaves the machine, and no script needs an API key. Write diagrams as Mermaid inline."
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
   composed-from: "scientific-critical-thinking, literature-review, scientific-brainstorming, scientific-writing, scholar-evaluation (K-Dense AI)"
 ---
 

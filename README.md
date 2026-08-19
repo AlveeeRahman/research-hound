@@ -133,7 +133,9 @@ copy before uploading, and exclude `.git`:
 zip -r research-hound.zip research-hound -x "research-hound/.git/*" "research-hound/.git"
 ```
 
-## What's new in v1.1.1
+## What's new in v1.2.0
+
+**The description now fits claude.ai's uploader.** It caps `description` at 200 characters; the Agent Skills spec allows 1024, so a 652-character description passed every local check and would still have been rejected on upload. It is 192 characters now, rewritten rather than truncated — a plain cut would have removed the whole "Use for…" clause, which is the half that decides when the skill triggers. The `compatibility` field was also unquoted while containing `: `, which made the frontmatter fail a strict YAML parse.
 
 **The image-generation stage is gone.** It posted your diagram prompt to a hosted model
 and needed an API key, and its documentation had described one of its two scripts as an

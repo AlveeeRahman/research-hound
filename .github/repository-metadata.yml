@@ -22,7 +22,7 @@ primary_keyword: "scientific research workflow for Claude Code"
 title: "Research Hound: a scientific research workflow for Claude Code"
 description: "A scientific research workflow for Claude Code: five stages and 21 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring."
 
-version: "1.1.1"
+version: "1.2.0"
 license_spdx: MIT
 programming_language: Python
 runtime_platform: Claude Code (Agent Skills)
