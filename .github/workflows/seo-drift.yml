@@ -1,0 +1,97 @@
+name: SEO drift
+
+# Two independent kinds of drift, checked on a schedule and on every pull request
+# that touches the inputs:
+#
+#   1. The generated site no longer matches the manifest. Fixable here, so this
+#      workflow opens a pull request with the regenerated files.
+#   2. github.com's own description, homepage or topics no longer match the manifest.
+#      Reported, never applied automatically: changing those needs a token with
+#      repository administration rights, which is not something a documentation
+#      workflow should hold.
+#
+# Nothing here pushes to the default branch.
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  pull_request:
+    paths:
+      - "docs/**"
+      - "README.md"
+      - ".github/repository-metadata.yml"
+      - ".github/seo/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  site:
+    name: Generated site matches the manifest
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Validate the manifest
+        run: python .github/seo/seo.py validate
+
+      # On a pull request, drift is the author's to fix, so fail and say so.
+      - name: Check for drift
+        if: github.event_name == 'pull_request'
+        run: python .github/seo/seo.py check
+
+      - name: Verify the site
+        if: github.event_name == 'pull_request'
+        run: python .github/seo/seo.py verify
+
+      # On a schedule there is no author in the loop, so regenerate and propose it.
+      - name: Regenerate
+        if: github.event_name != 'pull_request'
+        run: python .github/seo/seo.py build
+
+      - name: Open a pull request with the regenerated files
+        if: github.event_name != 'pull_request'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          branch: seo/regenerate
+          title: "Regenerate the Pages site from the metadata manifest"
+          commit-message: "Regenerate the Pages site from the metadata manifest"
+          body: |
+            The generated regions of `docs/` and `README.md` had drifted from
+            `.github/repository-metadata.yml`. This pull request contains only the
+            regenerated output — every change here is a fact that already changed in
+            the manifest.
+
+            Hand-written sections are untouched: the generator only rewrites the
+            regions between `seo:*:begin` and `seo:*:end`.
+          delete-branch: true
+
+  repository-metadata:
+    name: github.com metadata matches the manifest
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      # Read-only. Applying needs repository administration write, which GITHUB_TOKEN
+      # cannot be granted through the `permissions:` key at all — so this reports the
+      # difference and a human runs `seo.py sync-metadata --apply` with their own
+      # credentials.
+      - name: Report any divergence
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+        run: python .github/seo/seo.py sync-metadata

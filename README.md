@@ -1,13 +1,33 @@
-# Research Hound: the extended research skill for Claude
+# Research Hound: a scientific research workflow for Claude Code
 
 [![CI](https://github.com/AlveeeRahman/research-hound/actions/workflows/ci.yml/badge.svg)](https://github.com/AlveeeRahman/research-hound/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/AlveeeRahman/research-hound/blob/main/LICENSE)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+
+<!-- seo:readme:begin  generated from .github/repository-metadata.yml by .github/seo/seo.py; edit the manifest, not this block -->
+**Documentation**: [alveeerahman.github.io/research-hound](https://alveeerahman.github.io/research-hound/)
+
+Python 3.10+ (tested on 3.10, 3.11, 3.12, 3.13) · 23 runnable scripts · 3 script(s) reach the network · MIT licensed
+
+<details>
+<summary>What touches the network</summary>
+
+| Script | Reaches | Why |
+| --- | --- | --- |
+| `scripts/literature-review/verify_citations.py` | doi.org, api.crossref.org | Resolve and verify DOIs against the handle system and Crossref. |
+| `scripts/schematics/generate_schematic_ai.py` | openrouter.ai | Send the diagram prompt to a third-party image model. |
+| `scripts/schematics/generate_schematic.py` | openrouter.ai | Wrapper that invokes generate_schematic_ai.py; not an offline alternative. |
+
+</details>
+
+Part of a three-skill suite: [Skill Vision](https://alveeerahman.github.io/skill-vision/) · [Agent Oracle](https://alveeerahman.github.io/agent-oracle/) · **Research Hound** (you are here)
+
+<!-- seo:readme:end -->
 
 **research-hound** is an [Agent Skill](https://code.claude.com/docs/en/skills) for Claude
 Code that turns Claude into a methodical research partner: a six-stage scientific
 workflow (critical thinking, literature review, brainstorming, schematics, writing,
-evaluation) backed by **24 runnable scripts** that verify what a chat model would
+evaluation) backed by **23 runnable scripts** that verify what a chat model would
 otherwise just assert. It hunts down the weak citation, the untraceable claim, and the
 statistical pitfall before a reviewer does.
 
@@ -21,7 +41,7 @@ git clone https://github.com/AlveeeRahman/research-hound.git ~/.claude/skills/re
 git clone https://github.com/AlveeeRahman/research-hound.git .claude/skills/research-hound
 ```
 
-Python 3.9+, standard library only, except `requests` in the three network scripts:
+Python 3.10+, standard library only, except `requests` in the three network scripts:
 `scripts/literature-review/verify_citations.py` (DOI resolvers),
 `scripts/schematics/generate_schematic_ai.py` and
 `scripts/schematics/generate_schematic.py` (both send your prompt to OpenRouter, and the
@@ -33,7 +53,7 @@ Then ask Claude in your own words:
 > *"Is this analysis p-hacked?"*
 > *"Score this manuscript against the rubric and report inter-rater agreement."*
 
-## The hound's route: six stages, twenty-four checks
+## The hound's route: six stages, twenty-three checks
 
 A research question goes in one end. A manuscript that can survive review comes out the
 other. No stage is skippable, and every stage past the first carries its own runnable
@@ -68,7 +88,7 @@ flowchart LR
 | # | Stage | Scripts | What actually runs |
 |--:|---|--:|---|
 | 1 | Critical thinking | none | Evidence hierarchy, logical fallacies, statistical pitfalls, bias catalogs (`references/critical-thinking/`) |
-| 2 | Literature review | 3 | `search_databases.py` (PubMed / arXiv / Semantic Scholar), `verify_citations.py`, `generate_pdf.py` |
+| 2 | Literature review | 3 | `search_databases.py` (dedupes, ranks and formats results Claude retrieves from PubMed / arXiv / Semantic Scholar; runs offline), `verify_citations.py` (queries DOI resolvers), `generate_pdf.py` |
 | 3 | Brainstorming | 3 | Scored ideation matrix, session scaffolds, register validation |
 | 4 | Schematics | 2 | Diagram generation with iterative refinement |
 | 5 | Writing | 8 | `scaffold_manuscript.py` (IMRaD), `lint_manuscript.py`, `audit_claims.py`, `check_references.py`, `check_consistency.py`, `select_reporting_guidelines.py` (CONSORT / PRISMA / STROBE), `validate_authorship.py` |
@@ -108,7 +128,7 @@ sit at 1-2 stars, so the field is young):
 |---|:---:|:---:|:---:|:---:|
 | Shape | one staged workflow, question → publication | 8 independent point skills | review-support skills (ML/CS + HPC) | multi-agent deep-research harness |
 | End-to-end lifecycle (think → search → write → judge) | ✅ 6 stages | ❌ | ❌ review-centric | ❌ report-centric (6 phases of *search*) |
-| Runnable verification scripts | ✅ 24 | partial (paper lookup/download) | ✅ (bibliography checks, guard-tested stdlib) | ❌ orchestration, not local CLIs |
+| Runnable verification scripts | ✅ 23 | partial (paper lookup/download) | ✅ (bibliography checks, guard-tested stdlib) | ❌ orchestration, not local CLIs |
 | Citation verification | ✅ `verify_citations.py` | via Semantic Scholar skill | ✅ | ❌ |
 | Manuscript pipeline (IMRaD scaffold → claim audit → lint → reporting guidelines) | ✅ | ❌ | ❌ | ❌ |
 | Rubric evaluation with inter-rater agreement | ✅ | ❌ | ❌ | evaluator-driven search only |
@@ -180,7 +200,7 @@ a working `--help`.
 - **`SKILL.md`**: the six-stage routing instructions Claude loads (~3.7k tokens total context cost).
 - **`guides/`**: one guide per stage.
 - **`references/`**: 36 stage-organized reference documents (evidence hierarchies, database strategies, citation styles, IMRaD structure, evaluation frameworks…), each linked directly from SKILL.md.
-- **`scripts/`**: 24 CLIs across five stages (critical thinking ships no scripts, by design).
+- **`scripts/`**: 23 CLIs across five stages (critical thinking ships no scripts, by design).
 - **`scripts/_shared/safe_io.py`**: the file-I/O module shared by the brainstorming, evaluation, and writing stages. It opens local files with `O_NOFOLLOW` and checks the resulting descriptor via `os.fstat`, so a symlink swapped in between a check and a read cannot be followed. Each stage keeps its own extra checks on top: duplicate-key rejection, non-finite-number rejection, structure and depth bounds, and, for evaluation, rejection of private-field keys.
 - **`assets/`**: supporting fixtures.
 

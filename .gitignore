@@ -2,3 +2,7 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Local Claude Code session state: worktrees, settings, transcripts.
+# Never belongs in a published skill.
+.claude/

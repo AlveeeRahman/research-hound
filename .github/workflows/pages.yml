@@ -1,0 +1,100 @@
+name: Pages
+
+# Builds and deploys the GitHub Pages site through Actions rather than straight from
+# the branch, because the site has gates worth failing on: the manifest has to be
+# valid, the committed HTML has to match what the manifest generates, and the built
+# site has to pass the canonical/sitemap/structured-data checks before it goes live.
+#
+# Indexing services are notified only after a successful production deployment, and
+# only for URLs whose content actually changed.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/repository-metadata.yml"
+      - ".github/seo/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+# Read-only by default. The two jobs that need more ask for it themselves.
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: The manifest is well-formed and truthful
+        run: python .github/seo/seo.py validate
+
+      - name: The committed site matches what the manifest generates
+        run: python .github/seo/seo.py check
+
+      - name: Quality gates over the built site
+        run: python .github/seo/seo.py verify
+
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: docs
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+
+  notify-indexnow:
+    name: Notify IndexNow
+    needs: deploy
+    if: success()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      # `content_updated` in the manifest is the change-only gate. It is bumped when
+      # the published text changes and left alone for styling, so a restyle deploys
+      # without spending anyone's crawl budget. IndexNow reaches Bing, Naver, Yandex,
+      # Seznam and Yep; it does not reach Google, which discovers changes through the
+      # sitemap instead.
+      - name: Submit only if the content date moved
+        run: |
+          before=$(git show HEAD^:.github/repository-metadata.yml 2>/dev/null \
+                   | grep '^content_updated:' || echo "none")
+          after=$(grep '^content_updated:' .github/repository-metadata.yml)
+          if [ "$before" = "$after" ]; then
+            echo "content_updated is unchanged ($after); nothing material to submit."
+            exit 0
+          fi
+          echo "content_updated moved: ${before} -> ${after}"
+          python .github/seo/seo.py indexnow --all

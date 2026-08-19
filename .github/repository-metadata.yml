@@ -1,0 +1,118 @@
+# Source of truth for everything a search engine sees about this repository.
+#
+# The GitHub Pages site under docs/ and the repository description, homepage and
+# topics on github.com are both generated from this file by .github/seo/seo.py.
+# Change a fact here, not in the generated blocks; CI fails the pull request when
+# the two disagree.
+#
+#   python .github/seo/seo.py validate    # this file is well-formed and truthful
+#   python .github/seo/seo.py build       # regenerate docs/
+#   python .github/seo/seo.py verify      # quality gates over the built site
+
+schema_version: 1
+repository: AlveeeRahman/research-hound
+name: Research Hound
+
+canonical_url: https://alveeerahman.github.io/research-hound/
+sitemap_url: https://alveeerahman.github.io/research-hound/sitemap.xml
+
+# One precise phrase, used once each in the title, the opening paragraph, one
+# heading, the repository description and the Pages title. Not repeated beyond that.
+primary_keyword: "scientific research workflow for Claude Code"
+
+title: "Research Hound: a scientific research workflow for Claude Code"
+site_name: Research Hound
+description: "A scientific research workflow for Claude Code: six stages and 23 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring."
+
+version: "1.1.1"
+license_spdx: MIT
+license_url: https://github.com/AlveeeRahman/research-hound/blob/HEAD/LICENSE
+programming_language: Python
+runtime_platform: Claude Code (Agent Skills)
+author:
+  name: Alvee Rahman
+  url: https://github.com/AlveeeRahman
+
+# Checked against scripts/ on every run, so the headline number cannot drift.
+runnable_scripts: 23
+
+# The floor is 3.10, not 3.9: several scripts use PEP 604 unions (`str | None`) in
+# runtime signatures without `from __future__ import annotations`, which raises
+# TypeError on 3.9 at import time.
+supported_python:
+  - "3.10"
+  - "3.11"
+  - "3.12"
+  - "3.13"
+
+# Every script that opens a network connection, and where it connects to. An empty
+# list is a positive claim of "nothing here reaches the network" and is checked
+# against the code by `seo.py verify`.
+network_surfaces:
+  - script: scripts/literature-review/verify_citations.py
+    hosts:
+      - doi.org
+      - api.crossref.org
+    purpose: Resolve and verify DOIs against the handle system and Crossref.
+    requires: requests
+  - script: scripts/schematics/generate_schematic_ai.py
+    hosts:
+      - openrouter.ai
+    purpose: Send the diagram prompt to a third-party image model.
+    requires: requests, OPENROUTER_API_KEY
+  - script: scripts/schematics/generate_schematic.py
+    hosts:
+      - openrouter.ai
+    purpose: Wrapper that invokes generate_schematic_ai.py; not an offline alternative.
+    requires: requests, OPENROUTER_API_KEY
+
+# GitHub allows 20. Lowercase words separated by hyphens, describing what the
+# software is rather than how good it is.
+topics:
+  - academic-research
+  - academic-writing
+  - agent-skills
+  - citation-verification
+  - claude-code
+  - claude-code-skills
+  - claude-skills
+  - deep-research
+  - literature-review
+  - manuscript-linting
+  - peer-review
+  - pubmed
+  - research-assistant
+  - scientific-writing
+  - systematic-review
+
+og_image: assets/social-preview.png
+og_image_alt: "Research Hound: a scientific research workflow for Claude Code"
+
+resources:
+  releases: true
+  examples_label: Worked guides for each stage
+  examples_path: guides
+  # No benchmark artifacts in this repository, so no benchmark link is emitted.
+  benchmarks_label: Reference material
+  benchmarks_path: references
+
+# The date the published content last changed in a way worth recrawling. Drives
+# sitemap lastmod and gates IndexNow, so bump it for content changes only, never
+# for styling.
+content_updated: "2026-08-18"
+
+suite:
+  - name: Skill Vision
+    url: https://alveeerahman.github.io/skill-vision/
+  - name: Agent Oracle
+    url: https://alveeerahman.github.io/agent-oracle/
+  - name: Research Hound
+    url: https://alveeerahman.github.io/research-hound/
+
+indexing:
+  google_search_console: true
+  bing_webmaster_tools: true
+  indexnow: true
+  # Public by protocol design: IndexNow proves ownership by serving this key at
+  # <canonical_url><key>.txt. It authorises nothing else.
+  indexnow_key: 8f3c1d9a4b6e47f0a2c58d1b7e9034a6
