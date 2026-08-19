@@ -4,25 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/AlveeeRahman/research-hound/blob/main/LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 
-<!-- seo:readme:begin  generated from .github/repository-metadata.yml by .github/seo/seo.py; edit the manifest, not this block -->
-**Documentation**: [alveeerahman.github.io/research-hound](https://alveeerahman.github.io/research-hound/)
-
-Python 3.10+ (tested on 3.10, 3.11, 3.12, 3.13) · 23 runnable scripts · 3 script(s) reach the network · MIT licensed
-
-<details>
-<summary>What touches the network</summary>
-
-| Script | Reaches | Why |
-| --- | --- | --- |
-| `scripts/literature-review/verify_citations.py` | doi.org, api.crossref.org | Resolve and verify DOIs against the handle system and Crossref. |
-| `scripts/schematics/generate_schematic_ai.py` | openrouter.ai | Send the diagram prompt to a third-party image model. |
-| `scripts/schematics/generate_schematic.py` | openrouter.ai | Wrapper that invokes generate_schematic_ai.py; not an offline alternative. |
-
-</details>
-
-Part of a three-skill suite: [Skill Vision](https://alveeerahman.github.io/skill-vision/) · [Agent Oracle](https://alveeerahman.github.io/agent-oracle/) · **Research Hound** (you are here)
-
-<!-- seo:readme:end -->
+**Documentation**: [alveeerahman.github.io/research-hound](https://alveeerahman.github.io/research-hound/) ·
+part of a three-skill suite with [Skill Vision](https://alveeerahman.github.io/skill-vision/)
+and [Agent Oracle](https://alveeerahman.github.io/agent-oracle/).
 
 **research-hound** is an [Agent Skill](https://code.claude.com/docs/en/skills) for Claude
 Code that turns Claude into a methodical research partner: a six-stage scientific

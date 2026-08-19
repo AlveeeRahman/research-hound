@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- seo:head:begin  generated from .github/repository-metadata.yml by .github/seo/seo.py; edit the manifest, not this block -->
 <title>Research Hound: a scientific research workflow for Claude Code</title>
 <meta name="description" content="A scientific research workflow for Claude Code: six stages and 23 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring.">
 <link rel="canonical" href="https://alveeerahman.github.io/research-hound/">
@@ -34,11 +33,9 @@
     "@type": "Person",
     "name": "Alvee Rahman",
     "url": "https://github.com/AlveeeRahman"
-  },
-  "runtimeRequirement": "Python 3.10, 3.11, 3.12, 3.13"
+  }
 }
 </script>
-<!-- seo:head:end -->
 <style>
   :root { --ink:#1f2937; --sub:#4b5563; --line:#e5e7eb; --accent:#1d4ed8; --bg:#ffffff; --code:#f3f4f6; }
   @media (prefers-color-scheme: dark) {
@@ -86,7 +83,7 @@
     <tr><td>5</td><td>Writing</td><td>IMRaD scaffold, manuscript lint, <strong>claim-evidence audit</strong>, reference checks, CONSORT / PRISMA / STROBE selection</td></tr>
     <tr><td>6</td><td>Evaluation</td><td>Rubric validation and scoring, <strong>inter-rater agreement</strong>, weight sensitivity, traceability</td></tr>
   </table>
-  <p>Claude runs the searches with its own web tools; <code>search_databases.py</code> is the offline half — it deduplicates by DOI, ranks, filters by year, and emits JSON, Markdown or BibTeX. The script that does reach the network is <code>verify_citations.py</code>, which checks each DOI actually resolves.</p>
+  <p>Claude runs the searches with its own web tools. <code>search_databases.py</code> is the local half — it deduplicates by DOI, ranks, filters by year, and emits JSON, Markdown or BibTeX, without opening a connection of its own. The script that does reach out is <code>verify_citations.py</code>, which checks each DOI actually resolves.</p>
 
   <h2 id="what-touches-the-network">What touches the network</h2>
   <p>Three of the 23 scripts open connections. Everything else runs offline on the standard library.</p>
@@ -101,18 +98,14 @@
   <h2>Why not just use Claude's built-in research?</h2>
   <p>Built-in web search and Deep Research are retrieval and synthesis — one pass, inside the chat. Research Hound is a <strong>methodology harness</strong>: citations get verified rather than merely cited, manuscript claims are traced to evidence, and every check is a plain CLI your CI can re-run. It covers what happens <em>before</em> the search (interrogating the question) and <em>after</em> it (writing, auditing, and scoring the result).</p>
 
-  <!-- seo:links:begin  generated from .github/repository-metadata.yml by .github/seo/seo.py; edit the manifest, not this block -->
-    <h2 id="project-resources">Project resources</h2>
-    <ul>
-      <li><a href="https://github.com/AlveeeRahman/research-hound">Source repository</a></li>
-      <li><a href="https://github.com/AlveeeRahman/research-hound/releases">Releases and changelog</a></li>
-      <li><a href="https://github.com/AlveeeRahman/research-hound/blob/HEAD/SECURITY.md">Security policy</a></li>
-      <li><a href="https://github.com/AlveeeRahman/research-hound/tree/HEAD/guides">Worked guides for each stage</a></li>
-      <li><a href="https://github.com/AlveeeRahman/research-hound/tree/HEAD/references">Reference material</a></li>
-    </ul>
-    <h2 id="the-suite">Part of a three-skill suite</h2>
-    <p><a href="https://alveeerahman.github.io/skill-vision/">Skill Vision</a> · <a href="https://alveeerahman.github.io/agent-oracle/">Agent Oracle</a> · <strong>Research Hound</strong> (this page)</p>
-  <!-- seo:links:end -->
+  <h2 id="project-resources">Project resources</h2>
+  <ul>
+    <li><a href="https://github.com/AlveeeRahman/research-hound">Source repository</a></li>
+    <li><a href="https://github.com/AlveeeRahman/research-hound/releases">Releases and changelog</a></li>
+    <li><a href="https://github.com/AlveeeRahman/research-hound/blob/HEAD/SECURITY.md">Security policy</a></li>
+    <li><a href="https://github.com/AlveeeRahman/research-hound/tree/HEAD/guides">Worked guides for each stage</a></li>
+  </ul>
+  <p>Part of a three-skill suite: <a href="https://alveeerahman.github.io/skill-vision/">Skill Vision</a> · <a href="https://alveeerahman.github.io/agent-oracle/">Agent Oracle</a> · <strong>Research Hound</strong> (this page)</p>
 
   <footer>
     MIT licensed · <a href="https://github.com/AlveeeRahman/research-hound">github.com/AlveeeRahman/research-hound</a> · QA'd by <a href="https://github.com/AlveeeRahman/skill-vision">skill-vision</a> in CI on every push.

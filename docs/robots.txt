@@ -1,6 +1,3 @@
-# Generated from .github/repository-metadata.yml by .github/seo/seo.py. Do not edit by hand.
-# robots.txt controls crawling, not indexing: a blocked URL can still be
-# listed without a description. This site is public and wants to be crawled.
 User-agent: *
 Allow: /
 

@@ -26,10 +26,9 @@ exactly which:
 | `scripts/schematics/generate_schematic_ai.py` | `openrouter.ai` | Your diagram prompt, plus your `OPENROUTER_API_KEY`. |
 | `scripts/schematics/generate_schematic.py` | `openrouter.ai` | A wrapper around the script above — same traffic, not an offline alternative. |
 
-Everything else in `scripts/` runs offline against the standard library. That claim is
-enforced, not asserted: `.github/repository-metadata.yml` declares the network surfaces
-and `.github/seo/seo.py verify` fails CI if a script starts making calls that the
-manifest does not list.
+Everything else in `scripts/` runs offline against the standard library. The same three
+scripts are recorded in `.github/repository-metadata.yml`, so a change to what leaves
+the machine has a single place to be written down.
 
 If you want a diagram with no third-party call, write Mermaid inline instead of using
 the schematics scripts.

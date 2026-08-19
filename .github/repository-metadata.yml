@@ -1,13 +1,12 @@
-# Source of truth for everything a search engine sees about this repository.
+# What this repository says about itself, in one place.
 #
-# The GitHub Pages site under docs/ and the repository description, homepage and
-# topics on github.com are both generated from this file by .github/seo/seo.py.
-# Change a fact here, not in the generated blocks; CI fails the pull request when
-# the two disagree.
+# This is a record, not a contract: no script reads it and no CI job enforces it.
+# It exists so that the next person -- or the next agent -- changing the repository
+# description, the topics, the README opening or the Pages <head> has one file to read
+# instead of reverse-engineering the intent from three places that had already drifted
+# apart once.
 #
-#   python .github/seo/seo.py validate    # this file is well-formed and truthful
-#   python .github/seo/seo.py build       # regenerate docs/
-#   python .github/seo/seo.py verify      # quality gates over the built site
+# When you change a fact here, change it in the places listed under `appears_in` too.
 
 schema_version: 1
 repository: AlveeeRahman/research-hound
@@ -16,38 +15,37 @@ name: Research Hound
 canonical_url: https://alveeerahman.github.io/research-hound/
 sitemap_url: https://alveeerahman.github.io/research-hound/sitemap.xml
 
-# One precise phrase, used once each in the title, the opening paragraph, one
-# heading, the repository description and the Pages title. Not repeated beyond that.
+# One precise phrase. It belongs in the title, the opening paragraph, one heading and
+# the repository description -- once each, not repeated for its own sake.
 primary_keyword: "scientific research workflow for Claude Code"
 
 title: "Research Hound: a scientific research workflow for Claude Code"
-site_name: Research Hound
 description: "A scientific research workflow for Claude Code: six stages and 23 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring."
 
 version: "1.1.1"
 license_spdx: MIT
-license_url: https://github.com/AlveeeRahman/research-hound/blob/HEAD/LICENSE
 programming_language: Python
 runtime_platform: Claude Code (Agent Skills)
 author:
   name: Alvee Rahman
   url: https://github.com/AlveeeRahman
 
-# Checked against scripts/ on every run, so the headline number cannot drift.
+# 23 CLIs under scripts/, excluding the four underscore-prefixed helper modules.
+# The README said 24 and the repository description said 26 before this was written down.
 runnable_scripts: 23
 
-# The floor is 3.10, not 3.9: several scripts use PEP 604 unions (`str | None`) in
-# runtime signatures without `from __future__ import annotations`, which raises
-# TypeError on 3.9 at import time.
+# 3.10, not 3.9: several scripts use PEP 604 unions (`str | None`) in runtime signatures
+# without `from __future__ import annotations`, which raises TypeError on 3.9 at import.
+# The CI matrix runs every version listed here.
 supported_python:
   - "3.10"
   - "3.11"
   - "3.12"
   - "3.13"
 
-# Every script that opens a network connection, and where it connects to. An empty
-# list is a positive claim of "nothing here reaches the network" and is checked
-# against the code by `seo.py verify`.
+# Every script that opens a network connection. Everything else in scripts/ runs offline
+# on the standard library. search_databases.py is deliberately absent: despite the name
+# it makes no request, and only formats results Claude retrieves with its own web tools.
 network_surfaces:
   - script: scripts/literature-review/verify_citations.py
     hosts:
@@ -66,8 +64,8 @@ network_surfaces:
     purpose: Wrapper that invokes generate_schematic_ai.py; not an offline alternative.
     requires: requests, OPENROUTER_API_KEY
 
-# GitHub allows 20. Lowercase words separated by hyphens, describing what the
-# software is rather than how good it is.
+# GitHub allows 20. Lowercase words separated by hyphens, describing what the software
+# is rather than how good it is.
 topics:
   - academic-research
   - academic-writing
@@ -85,21 +83,9 @@ topics:
   - scientific-writing
   - systematic-review
 
-og_image: assets/social-preview.png
-og_image_alt: "Research Hound: a scientific research workflow for Claude Code"
-
-resources:
-  releases: true
-  examples_label: Worked guides for each stage
-  examples_path: guides
-  # No benchmark artifacts in this repository, so no benchmark link is emitted.
-  benchmarks_label: Reference material
-  benchmarks_path: references
-
-# The date the published content last changed in a way worth recrawling. Drives
-# sitemap lastmod and gates IndexNow, so bump it for content changes only, never
-# for styling.
-content_updated: "2026-08-18"
+# 1280x640, the size GitHub asks for. docs/assets/social-preview.svg is the editable
+# source; see SECURITY.md's sibling note in the README for how to re-render it.
+social_preview: docs/assets/social-preview.png
 
 suite:
   - name: Skill Vision
@@ -109,10 +95,10 @@ suite:
   - name: Research Hound
     url: https://alveeerahman.github.io/research-hound/
 
-indexing:
-  google_search_console: true
-  bing_webmaster_tools: true
-  indexnow: true
-  # Public by protocol design: IndexNow proves ownership by serving this key at
-  # <canonical_url><key>.txt. It authorises nothing else.
-  indexnow_key: 8f3c1d9a4b6e47f0a2c58d1b7e9034a6
+# The files that repeat the facts above. Keep them in step by hand.
+appears_in:
+  - README.md
+  - SKILL.md
+  - docs/index.html
+  - docs/sitemap.xml
+  - github.com repository description, homepage and topics
