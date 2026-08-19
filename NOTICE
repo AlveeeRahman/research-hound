@@ -1,13 +1,12 @@
 research-hound
 Copyright (c) 2026 MrPirate
 
-This package is composed from six skills in K-Dense AI's scientific-agent-skills
+This package is composed from five skills in K-Dense AI's scientific-agent-skills
 repository (https://github.com/K-Dense-AI/scientific-agent-skills), licensed MIT:
 
   scientific-critical-thinking
   literature-review
   scientific-brainstorming
-  scientific-schematics
   scientific-writing
   scholar-evaluation
 

@@ -38,16 +38,14 @@ Only add figures when the **user explicitly requests** a diagram (for example, a
 - GRADE or risk-of-bias evaluation frameworks
 
 **How to create figures:**
-- **Preferred:** Use the schematics stage (`guides/schematics.md`) for AI-generated diagrams from a natural-language description
-- **Alternative:** Build figures in your usual tools (draw.io, PowerPoint, matplotlib, etc.)
+- **Preferred:** write the diagram as Mermaid inline. Claude Code and claude.ai both
+  render a ` ```mermaid ` block, so you see it immediately and the source stays
+  diffable alongside the manuscript. A GRADE assessment or a risk-of-bias decision tree
+  is a `flowchart TD`.
+- **Alternative:** build it in your usual tools (matplotlib, Graphviz, Inkscape) when
+  the figure needs axes or exact placement.
 
-From this skill's root, with `OPENROUTER_API_KEY` set:
-
-```bash
-python scripts/schematics/generate_schematic.py "GRADE evidence assessment flowchart with downgrade and upgrade factors" -o figures/grade_flowchart.png --doc-type report
-```
-
-**Disclosure:** AI schematic generation sends your prompt to [OpenRouter](https://openrouter.ai/) (a third-party API). Do not include unpublished sensitive details unless that transmission is appropriate for your project.
+Nothing in this skill generates images, and no figure description leaves your machine.
 
 ---
 

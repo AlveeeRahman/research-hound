@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="Research Hound: a scientific research workflow for Claude Code">
+  <!-- Source for social-preview.png. Rendered at exactly 1280x640, the size GitHub
+       asks for. Type is deliberately oversized: this image is shown at a fraction of
+       its width in link previews and repository cards, and has to stay readable there. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#131f36"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="10" fill="#34d399"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+    <text x="86" y="196" font-size="92">🐕</text>
+    <text x="86" y="310" font-size="82" font-weight="700" fill="#f8fafc">Research Hound</text>
+    <text x="86" y="386" font-size="38" font-weight="500" fill="#34d399">A scientific research workflow</text>
+    <text x="86" y="440" font-size="38" font-weight="500" fill="#34d399">for Claude Code</text>
+    <text x="86" y="524" font-size="27" fill="#94a3b8">Six stages · 23 runnable scripts · citation verification · claim audits</text>
+    <text x="86" y="576" font-size="25" fill="#64748b">github.com/AlveeeRahman/research-hound</text>
+  </g>
+</svg>

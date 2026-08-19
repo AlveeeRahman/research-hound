@@ -1,0 +1,97 @@
+# What this repository says about itself, in one place.
+#
+# This is a record, not a contract: no script reads it and no CI job enforces it.
+# It exists so that the next person -- or the next agent -- changing the repository
+# description, the topics, the README opening or the Pages <head> has one file to read
+# instead of reverse-engineering the intent from three places that had already drifted
+# apart once.
+#
+# When you change a fact here, change it in the places listed under `appears_in` too.
+
+schema_version: 1
+repository: AlveeeRahman/research-hound
+name: Research Hound
+
+canonical_url: https://alveeerahman.github.io/research-hound/
+sitemap_url: https://alveeerahman.github.io/research-hound/sitemap.xml
+
+# One precise phrase. It belongs in the title, the opening paragraph, one heading and
+# the repository description -- once each, not repeated for its own sake.
+primary_keyword: "scientific research workflow for Claude Code"
+
+title: "Research Hound: a scientific research workflow for Claude Code"
+description: "A scientific research workflow for Claude Code: five stages and 21 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring."
+
+version: "1.1.1"
+license_spdx: MIT
+programming_language: Python
+runtime_platform: Claude Code (Agent Skills)
+author:
+  name: Alvee Rahman
+  url: https://github.com/AlveeeRahman
+
+# 21 CLIs under scripts/, excluding the four underscore-prefixed helper modules.
+runnable_scripts: 21
+
+# 3.10, not 3.9: several scripts use PEP 604 unions (`str | None`) in runtime signatures
+# without `from __future__ import annotations`, which raises TypeError on 3.9 at import.
+# The CI matrix runs every version listed here.
+supported_python:
+  - "3.10"
+  - "3.11"
+  - "3.12"
+  - "3.13"
+
+# Every script that opens a network connection. Everything else in scripts/ runs offline
+# on the standard library, and no script requires an API key. search_databases.py is
+# deliberately absent: despite the name it makes no request, and only formats results
+# Claude retrieves with its own web tools.
+#
+# The image-generation stage that used to appear here was removed, not documented: it
+# posted the diagram prompt to a hosted model and needed a key for it.
+network_surfaces:
+  - script: scripts/literature-review/verify_citations.py
+    hosts:
+      - doi.org
+      - api.crossref.org
+    purpose: Resolve and verify DOIs against the handle system and Crossref.
+    requires: requests
+
+# GitHub allows 20. Lowercase words separated by hyphens, describing what the software
+# is rather than how good it is.
+topics:
+  - academic-research
+  - academic-writing
+  - agent-skills
+  - citation-verification
+  - claude-code
+  - claude-code-skills
+  - claude-skills
+  - deep-research
+  - literature-review
+  - manuscript-linting
+  - peer-review
+  - pubmed
+  - research-assistant
+  - scientific-writing
+  - systematic-review
+
+# 1280x640, the size GitHub asks for. docs/assets/social-preview.svg is the editable
+# source; see SECURITY.md's sibling note in the README for how to re-render it.
+social_preview: docs/assets/social-preview.png
+
+suite:
+  - name: Skill Vision
+    url: https://alveeerahman.github.io/skill-vision/
+  - name: Agent Oracle
+    url: https://alveeerahman.github.io/agent-oracle/
+  - name: Research Hound
+    url: https://alveeerahman.github.io/research-hound/
+
+# The files that repeat the facts above. Keep them in step by hand.
+appears_in:
+  - README.md
+  - SKILL.md
+  - docs/index.html
+  - docs/sitemap.xml
+  - github.com repository description, homepage and topics
