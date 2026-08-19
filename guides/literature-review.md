@@ -6,7 +6,6 @@
 
 - [Overview](#overview)
 - [When to Use This Skill](#when-to-use-this-skill)
-- [Visual Enhancement with Scientific Schematics](#visual-enhancement-with-scientific-schematics)
 - [Core Workflow](#core-workflow)
 - [Best Practices](#best-practices)
 - [Common Pitfalls to Avoid](#common-pitfalls-to-avoid)
@@ -32,40 +31,16 @@ Use this skill when:
 - Identifying research gaps and future directions
 - Requiring verified citations and professional formatting
 
-## Visual Enhancement with Scientific Schematics
+## Figures
 
-**⚠️ MANDATORY: Every literature review MUST include at least 1-2 AI-generated figures using the scientific-schematics skill.**
+A systematic review usually needs a PRISMA flow diagram, and most reviews are clearer
+with a search-strategy flowchart or a thematic synthesis diagram. Write them as Mermaid
+inline — Claude Code and claude.ai both render a ` ```mermaid ` block — and keep the
+source next to the manuscript so the counts in the figure and the counts in the text can
+be diffed against each other.
 
-This is not optional. Literature reviews without visual elements are incomplete. Before finalizing any document:
-1. Generate at minimum ONE schematic or diagram (e.g., PRISMA flow diagram for systematic reviews)
-2. Prefer 2-3 figures for comprehensive reviews (search strategy flowchart, thematic synthesis diagram, conceptual framework)
-
-**How to generate figures:**
-- Use the **scientific-schematics** skill to generate AI-powered publication-quality diagrams
-- Simply describe your desired diagram in natural language
-- Nano Banana Pro will automatically generate, review, and refine the schematic
-
-**How to generate schematics:**
-```bash
-python scripts/schematics/generate_schematic.py "your diagram description" -o figures/output.png
-```
-
-The AI will automatically:
-- Create publication-quality images with proper formatting
-- Review and refine through multiple iterations
-- Ensure accessibility (colorblind-friendly, high contrast)
-- Save outputs in the figures/ directory
-
-**When to add schematics:**
-- PRISMA flow diagrams for systematic reviews
-- Literature search strategy flowcharts
-- Thematic synthesis diagrams
-- Research gap visualization maps
-- Citation network diagrams
-- Conceptual framework illustrations
-- Any complex concept that benefits from visualization
-
-For detailed guidance on creating schematics, refer to the scientific-schematics skill documentation.
+Nothing in this skill generates images, and nothing sends a figure description to a
+hosted model. `references/writing/figures_tables.md` carries the publication standards.
 
 ---
 

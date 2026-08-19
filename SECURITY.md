@@ -16,28 +16,24 @@ the Python version you saw it on.
 
 ## What this skill does with your data
 
-research-hound is a set of local CLIs plus instructions for Claude. Most of it never
-leaves your machine. Three scripts do open network connections, and it is worth knowing
-exactly which:
+research-hound is a set of local CLIs plus instructions for Claude. Exactly one script
+opens a network connection:
 
 | Script | Reaches | What is sent |
 | --- | --- | --- |
 | `scripts/literature-review/verify_citations.py` | `doi.org`, `api.crossref.org` | The DOIs and citation strings you ask it to verify. |
-| `scripts/schematics/generate_schematic_ai.py` | `openrouter.ai` | Your diagram prompt, plus your `OPENROUTER_API_KEY`. |
-| `scripts/schematics/generate_schematic.py` | `openrouter.ai` | A wrapper around the script above — same traffic, not an offline alternative. |
 
-Everything else in `scripts/` runs offline against the standard library. The same three
-scripts are recorded in `.github/repository-metadata.yml`, so a change to what leaves
-the machine has a single place to be written down.
+Everything else in `scripts/` runs offline against the standard library. No script reads
+or requires an API key. The same surface is recorded in
+`.github/repository-metadata.yml`, so a change to what leaves the machine has a single
+place to be written down.
 
-If you want a diagram with no third-party call, write Mermaid inline instead of using
-the schematics scripts.
-
-## Handling `OPENROUTER_API_KEY`
-
-Pass it through the environment. Do not paste it into a prompt, commit it, or place it
-in a file inside a repository Claude can read — a key in the working tree is a key in
-the context window.
+**Nothing here sends your prose, your data or your figures to a hosted model.** An
+earlier version bundled an image generator that posted the diagram prompt to a
+third-party API and needed a key for it. It was removed rather than documented more
+loudly: a research skill that uploads descriptions of unpublished work is the wrong
+default however clearly the upload is disclosed. Write diagrams as Mermaid inline
+instead — it renders in Claude Code and claude.ai and never leaves the machine.
 
 ## Scope
 

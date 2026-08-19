@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Research Hound: a scientific research workflow for Claude Code</title>
-<meta name="description" content="A scientific research workflow for Claude Code: six stages and 23 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring.">
+<meta name="description" content="A scientific research workflow for Claude Code: five stages and 21 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring.">
 <link rel="canonical" href="https://alveeerahman.github.io/research-hound/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Research Hound">
 <meta property="og:title" content="Research Hound: a scientific research workflow for Claude Code">
-<meta property="og:description" content="A scientific research workflow for Claude Code: six stages and 23 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring.">
+<meta property="og:description" content="A scientific research workflow for Claude Code: five stages and 21 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring.">
 <meta property="og:url" content="https://alveeerahman.github.io/research-hound/">
 <meta property="og:image" content="https://alveeerahman.github.io/research-hound/assets/social-preview.png">
 <meta property="og:image:width" content="1280">
@@ -21,7 +21,7 @@
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
   "name": "Research Hound",
-  "description": "A scientific research workflow for Claude Code: six stages and 23 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring.",
+  "description": "A scientific research workflow for Claude Code: five stages and 21 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring.",
   "url": "https://alveeerahman.github.io/research-hound/",
   "codeRepository": "https://github.com/AlveeeRahman/research-hound",
   "programmingLanguage": "Python",
@@ -62,7 +62,7 @@
 <body>
 <main>
   <h1>🐕 Research Hound</h1>
-  <p class="sub"><strong>A scientific research workflow for Claude Code.</strong> Six stages — critical thinking, literature review, brainstorming, schematics, writing, evaluation — backed by 23 runnable scripts that verify what a chat model would otherwise just assert.</p>
+  <p class="sub"><strong>A scientific research workflow for Claude Code.</strong> Five stages — critical thinking, literature review, brainstorming, writing, evaluation — backed by 21 runnable scripts that verify what a chat model would otherwise just assert.</p>
 
   <p>
     <a class="cta" href="https://github.com/AlveeeRahman/research-hound">GitHub repository</a>
@@ -71,29 +71,26 @@
 
   <h2>Install as a Claude Code skill</h2>
   <pre><code>git clone https://github.com/AlveeeRahman/research-hound.git ~/.claude/skills/research-hound</code></pre>
-  <p>Python 3.10+, standard library only except the three scripts listed under <a href="#what-touches-the-network">what touches the network</a>. Then ask Claude: <em>"search the literature on X and verify every citation"</em>, <em>"audit the claims in my methods section"</em>, <em>"is this analysis p-hacked?"</em>, <em>"score this manuscript against the rubric"</em>.</p>
+  <p>Python 3.10+, standard library only except the one script listed under <a href="#what-touches-the-network">what touches the network</a>. Then ask Claude: <em>"search the literature on X and verify every citation"</em>, <em>"audit the claims in my methods section"</em>, <em>"is this analysis p-hacked?"</em>, <em>"score this manuscript against the rubric"</em>.</p>
 
-  <h2>Six stages, twenty-three checks</h2>
+  <h2>Five stages, twenty-one checks</h2>
   <table>
     <tr><th>#</th><th>Stage</th><th>Runnable tooling</th></tr>
     <tr><td>1</td><td>Critical thinking</td><td>Evidence hierarchy, logical fallacies, statistical pitfalls, bias catalogs</td></tr>
     <tr><td>2</td><td>Literature review</td><td>Result aggregation, deduplication and ranking across PubMed / arXiv / Semantic Scholar, <strong>citation verification</strong> against DOI resolvers, PDF generation</td></tr>
     <tr><td>3</td><td>Brainstorming</td><td>Scored ideation matrix, session scaffolds</td></tr>
-    <tr><td>4</td><td>Schematics</td><td>Figure and diagram generation with iterative refinement</td></tr>
-    <tr><td>5</td><td>Writing</td><td>IMRaD scaffold, manuscript lint, <strong>claim-evidence audit</strong>, reference checks, CONSORT / PRISMA / STROBE selection</td></tr>
-    <tr><td>6</td><td>Evaluation</td><td>Rubric validation and scoring, <strong>inter-rater agreement</strong>, weight sensitivity, traceability</td></tr>
+    <tr><td>4</td><td>Writing</td><td>IMRaD scaffold, manuscript lint, <strong>claim-evidence audit</strong>, reference checks, CONSORT / PRISMA / STROBE selection</td></tr>
+    <tr><td>5</td><td>Evaluation</td><td>Rubric validation and scoring, <strong>inter-rater agreement</strong>, weight sensitivity, traceability</td></tr>
   </table>
   <p>Claude runs the searches with its own web tools. <code>search_databases.py</code> is the local half — it deduplicates by DOI, ranks, filters by year, and emits JSON, Markdown or BibTeX, without opening a connection of its own. The script that does reach out is <code>verify_citations.py</code>, which checks each DOI actually resolves.</p>
 
   <h2 id="what-touches-the-network">What touches the network</h2>
-  <p>Three of the 23 scripts open connections. Everything else runs offline on the standard library.</p>
+  <p>One of the 21 scripts opens a connection. Everything else runs offline on the standard library, and no script needs an API key.</p>
   <table>
     <tr><th>Script</th><th>Reaches</th><th>Why</th></tr>
     <tr><td><code>literature-review/verify_citations.py</code></td><td>doi.org, api.crossref.org</td><td>Confirms a DOI resolves and the metadata matches the citation.</td></tr>
-    <tr><td><code>schematics/generate_schematic_ai.py</code></td><td>openrouter.ai</td><td>Sends your prompt to a third-party image model. Needs <code>OPENROUTER_API_KEY</code>.</td></tr>
-    <tr><td><code>schematics/generate_schematic.py</code></td><td>openrouter.ai</td><td>A wrapper around the one above, not an offline alternative.</td></tr>
   </table>
-  <p>For a diagram with no external call, write Mermaid inline instead.</p>
+  <p><strong>Nothing here sends your prose, data or figures to a hosted model.</strong> An earlier version bundled an image generator that posted your diagram prompt to a third-party API; it was removed rather than documented more loudly. Write diagrams as Mermaid inline — it renders in Claude Code and claude.ai and never leaves the machine.</p>
 
   <h2>Why not just use Claude's built-in research?</h2>
   <p>Built-in web search and Deep Research are retrieval and synthesis — one pass, inside the chat. Research Hound is a <strong>methodology harness</strong>: citations get verified rather than merely cited, manuscript claims are traced to evidence, and every check is a plain CLI your CI can re-run. It covers what happens <em>before</em> the search (interrogating the question) and <em>after</em> it (writing, auditing, and scoring the result).</p>

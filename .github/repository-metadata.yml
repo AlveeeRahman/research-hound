@@ -20,7 +20,7 @@ sitemap_url: https://alveeerahman.github.io/research-hound/sitemap.xml
 primary_keyword: "scientific research workflow for Claude Code"
 
 title: "Research Hound: a scientific research workflow for Claude Code"
-description: "A scientific research workflow for Claude Code: six stages and 23 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring."
+description: "A scientific research workflow for Claude Code: five stages and 21 runnable scripts for citation verification, claim audits, manuscript linting, and rubric scoring."
 
 version: "1.1.1"
 license_spdx: MIT
@@ -30,9 +30,8 @@ author:
   name: Alvee Rahman
   url: https://github.com/AlveeeRahman
 
-# 23 CLIs under scripts/, excluding the four underscore-prefixed helper modules.
-# The README said 24 and the repository description said 26 before this was written down.
-runnable_scripts: 23
+# 21 CLIs under scripts/, excluding the four underscore-prefixed helper modules.
+runnable_scripts: 21
 
 # 3.10, not 3.9: several scripts use PEP 604 unions (`str | None`) in runtime signatures
 # without `from __future__ import annotations`, which raises TypeError on 3.9 at import.
@@ -44,8 +43,12 @@ supported_python:
   - "3.13"
 
 # Every script that opens a network connection. Everything else in scripts/ runs offline
-# on the standard library. search_databases.py is deliberately absent: despite the name
-# it makes no request, and only formats results Claude retrieves with its own web tools.
+# on the standard library, and no script requires an API key. search_databases.py is
+# deliberately absent: despite the name it makes no request, and only formats results
+# Claude retrieves with its own web tools.
+#
+# The image-generation stage that used to appear here was removed, not documented: it
+# posted the diagram prompt to a hosted model and needed a key for it.
 network_surfaces:
   - script: scripts/literature-review/verify_citations.py
     hosts:
@@ -53,16 +56,6 @@ network_surfaces:
       - api.crossref.org
     purpose: Resolve and verify DOIs against the handle system and Crossref.
     requires: requests
-  - script: scripts/schematics/generate_schematic_ai.py
-    hosts:
-      - openrouter.ai
-    purpose: Send the diagram prompt to a third-party image model.
-    requires: requests, OPENROUTER_API_KEY
-  - script: scripts/schematics/generate_schematic.py
-    hosts:
-      - openrouter.ai
-    purpose: Wrapper that invokes generate_schematic_ai.py; not an offline alternative.
-    requires: requests, OPENROUTER_API_KEY
 
 # GitHub allows 20. Lowercase words separated by hyphens, describing what the software
 # is rather than how good it is.
