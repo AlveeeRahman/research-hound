@@ -1,9 +1,9 @@
 ---
 name: research-hound
-description: Five-stage scientific research workflow - critical thinking (appraise evidence, spot bias and statistical misuse), literature review (PubMed/arXiv/Semantic Scholar search, synthesis, citation verification), brainstorming (scored idea triage), writing (IMRaD, claim-evidence tracing, CONSORT/PRISMA/STROBE checklists), and evaluation (rubric scoring, inter-rater agreement). Use for academic work - framing a research question, systematic reviews and meta-analyses, critiquing a study design, drafting a paper or grant, checking citations, peer review - including when only the artifact is named (my methods section, reviewer 2 says, is this p-hacking).
+description: "Scientific research workflow: literature review, citation verification, claim audits, IMRaD/PRISMA linting, rubric scoring. Use for papers, systematic reviews, peer review, methods, p-hacking."
 license: MIT (upstream K-Dense-AI/scientific-agent-skills, MIT)
 allowed-tools: Read Edit Write Bash(python3 scripts/*)
-compatibility: Python 3.10+. Every script runs offline on the standard library except one: scripts/literature-review/verify_citations.py needs requests and queries DOI resolvers to check that a reference resolves. Nothing else leaves the machine, and no script needs an API key. Write diagrams as Mermaid inline.
+compatibility: "Python 3.10+. Every script runs offline on the standard library except one: scripts/literature-review/verify_citations.py needs requests and queries DOI resolvers to check that a reference resolves. Nothing else leaves the machine, and no script needs an API key. Write diagrams as Mermaid inline."
 metadata:
   version: "1.1.1"
   composed-from: "scientific-critical-thinking, literature-review, scientific-brainstorming, scientific-writing, scholar-evaluation (K-Dense AI)"
