@@ -88,7 +88,7 @@ flowchart LR
 | # | Stage | Scripts | What actually runs |
 |--:|---|--:|---|
 | 1 | Critical thinking | none | Evidence hierarchy, logical fallacies, statistical pitfalls, bias catalogs (`references/critical-thinking/`) |
-| 2 | Literature review | 3 | `search_databases.py` (dedupes, ranks and formats results Claude retrieves from PubMed / arXiv / Semantic Scholar; runs offline), `verify_citations.py` (queries DOI resolvers), `generate_pdf.py` |
+| 2 | Literature review | 3 | `search_databases.py` (dedupes, ranks and formats results Claude retrieves from PubMed / arXiv / Semantic Scholar — it opens no connection of its own), `verify_citations.py` (queries DOI resolvers), `generate_pdf.py` |
 | 3 | Brainstorming | 3 | Scored ideation matrix, session scaffolds, register validation |
 | 4 | Schematics | 2 | Diagram generation with iterative refinement |
 | 5 | Writing | 8 | `scaffold_manuscript.py` (IMRaD), `lint_manuscript.py`, `audit_claims.py`, `check_references.py`, `check_consistency.py`, `select_reporting_guidelines.py` (CONSORT / PRISMA / STROBE), `validate_authorship.py` |

@@ -3,7 +3,7 @@ name: research-hound
 description: Six-stage scientific research workflow - critical thinking (appraise evidence, spot bias and statistical misuse), literature review (PubMed/arXiv/Semantic Scholar search, synthesis, citation verification), brainstorming (scored idea triage), schematics (diagrams), writing (IMRaD, claim-evidence tracing, CONSORT/PRISMA/STROBE checklists), and evaluation (rubric scoring, inter-rater agreement). Use for academic work - framing a research question, systematic reviews and meta-analyses, critiquing a study design, drafting a paper or grant, checking citations, peer review - including when only the artifact is named (my methods section, reviewer 2 says, is this p-hacking).
 license: MIT (upstream K-Dense-AI/scientific-agent-skills, MIT)
 allowed-tools: Read Edit Write Bash(python3 scripts/*)
-compatibility: Python 3.10+. Scripts run offline on the standard library except three. scripts/literature-review/verify_citations.py needs requests and queries DOI resolvers. Both schematics generators - generate_schematic.py and generate_schematic_ai.py - need requests plus an OPENROUTER_API_KEY and send your prompt to a third-party API; generate_schematic.py is a wrapper that runs the AI one, not an offline alternative. For a diagram with no external call, write Mermaid inline instead.
+compatibility: Python 3.10+. Scripts run offline on the standard library except three. verify_citations.py needs requests and queries DOI resolvers. Both schematics generators - generate_schematic.py and generate_schematic_ai.py - need requests and an OPENROUTER_API_KEY and send your prompt to a third-party API; generate_schematic.py wraps the AI one, it is not an offline path. Write Mermaid inline for a diagram with no external call. Repo tooling .github/seo/seo.py calls the GitHub and IndexNow APIs.
 metadata:
   version: "1.1.1"
   composed-from: "scientific-critical-thinking, literature-review, scientific-brainstorming, scientific-schematics, scientific-writing, scholar-evaluation (K-Dense AI)"
@@ -153,17 +153,16 @@ scored it would invite exactly the false precision the stage exists to prevent.
 
 ### What leaves the machine
 
-Every script exposes `--help` and runs offline on the standard library, with three
-exceptions: `scripts/literature-review/verify_citations.py`,
-`scripts/schematics/generate_schematic_ai.py`, and
-`scripts/schematics/generate_schematic.py`. Check this list before passing anything
-unpublished to a script.
+Every script exposes `--help`. Exactly four open a network connection, and all four are
+in the table below; nothing else in the tree makes a request. Read the table before
+passing anything unpublished to a script.
 
 | Script | Needs | Sends your data where |
 | --- | --- | --- |
 | `scripts/literature-review/verify_citations.py` | `requests` | DOI resolvers (Crossref, DataCite) — the identifiers you are checking |
 | `scripts/schematics/generate_schematic_ai.py` | `requests`, `OPENROUTER_API_KEY` | OpenRouter, a third-party API — your full prompt |
 | `scripts/schematics/generate_schematic.py` | `requests`, `OPENROUTER_API_KEY` | OpenRouter — it is a thin wrapper that runs `generate_schematic_ai.py` |
+| `.github/seo/seo.py` | stdlib | The GitHub and IndexNow APIs — repository metadata and this project's own public URLs. Repository tooling, never invoked by the skill; listed here because it ships in the tree and the count above has to be true of every `.py` in it. |
 
 **There is no offline image generator in this skill.** `generate_schematic.py` reads like
 an offline alternative and is not one: it resolves the API key (from `--api-key`, the
