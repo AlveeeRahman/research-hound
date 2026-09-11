@@ -129,7 +129,7 @@ sit at 1-2 stars, so the field is young):
 | Citation verification | ✅ `verify_citations.py` | via Semantic Scholar skill | ✅ | ❌ |
 | Manuscript pipeline (IMRaD scaffold → claim audit → lint → reporting guidelines) | ✅ | ❌ | ❌ | ❌ |
 | Rubric evaluation with inter-rater agreement | ✅ | ❌ | ❌ | evaluator-driven search only |
-| Externally QA-audited + CI-validated | ✅ skill-vision, every push | ❌ | ❌ | ❌ |
+| Externally QA-audited + CI-validated | ✅ [NVIDIA SkillSpector](https://github.com/NVIDIA/skillspector), every push: static scan for prompt injection, data exfiltration, supply-chain, tool-misuse, excessive-agency and least-privilege patterns; 0-100 risk score with a SAFE / CAUTION / DO_NOT_INSTALL verdict; JSON + Markdown reports kept as CI artifacts ([latest run](https://github.com/AlveeeRahman/research-hound/actions/workflows/skillspector.yml)) | ❌ | ❌ | ❌ |
 
 Honest credit where due: `chgagne`'s bibliography tooling is real and its
 stdlib-guard-test discipline is excellent, and `jamoeight/deep-research-v2` is the strongest
