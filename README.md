@@ -22,9 +22,11 @@ This repository now runs [NVIDIA SkillSpector](https://github.com/NVIDIA/skillsp
 on every push and pull request:
 
 - `skillspector scan . --no-llm` generates JSON + Markdown reports as workflow artifacts.
-- The workflow summary publishes `risk_score`, `severity`, `recommendation`, and
-  `safe_to_install` as proof of the current safety posture.
-- The check fails when `safe_to_install` is not `true`.
+- The workflow summary publishes the report's `risk_score`, `severity`, `recommendation`
+  and the derived `safe_to_install` as proof of the current safety posture.
+- The check fails when `safe_to_install` is `false`, which uses SkillSpector's own rule:
+  a risk score above 50, i.e. a `DO_NOT_INSTALL` recommendation. A `CAUTION` verdict
+  passes but is visible in the summary.
 
 If you want to make it a required merge gate, add **SkillSpector scan** as a required
 status check in branch protection settings.

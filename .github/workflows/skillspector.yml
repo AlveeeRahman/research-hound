@@ -19,16 +19,33 @@ jobs:
 
       - uses: actions/setup-python@v7
         with:
+          # SkillSpector declares requires-python >=3.12.
           python-version: "3.12"
 
       - name: Install SkillSpector
         run: python -m pip install --quiet "git+https://github.com/NVIDIA/skillspector.git"
 
+      # `skillspector scan` exits 1 when the verdict is DO_NOT_INSTALL (score > 50)
+      # and 2 on an error. Exit 1 must not abort the job here, or the summary and
+      # the report artifacts would never be produced; the verdict is applied in
+      # the last step instead. `|| code=$?` is required under GitHub's `bash -e`.
       - name: Run SkillSpector (JSON)
-        run: skillspector scan . --no-llm --format json --output skillspector-report.json
+        run: |
+          code=0
+          skillspector scan . --no-llm --format json --output skillspector-report.json || code=$?
+          case "$code" in
+            0|1) ;;
+            *) echo "::error::skillspector scan failed with exit code $code"; exit 1 ;;
+          esac
 
       - name: Run SkillSpector (Markdown)
-        run: skillspector scan . --no-llm --format markdown --output skillspector-report.md
+        run: |
+          code=0
+          skillspector scan . --no-llm --format markdown --output skillspector-report.md || code=$?
+          case "$code" in
+            0|1) ;;
+            *) echo "::error::skillspector scan failed with exit code $code"; exit 1 ;;
+          esac
 
       - name: Summarize score and verdict
         id: parse_report
@@ -40,27 +57,20 @@ jobs:
 
           report = json.loads(Path("skillspector-report.json").read_text(encoding="utf-8"))
 
-          def find_first(node, key):
-              if isinstance(node, dict):
-                  if key in node:
-                      return node[key]
-                  for value in node.values():
-                      found = find_first(value, key)
-                      if found is not None:
-                          return found
-              elif isinstance(node, list):
-                  for value in node:
-                      found = find_first(value, key)
-                      if found is not None:
-                          return found
-              return None
+          # Single-skill reports carry `risk_assessment.{score,severity,recommendation}`.
+          # A recursive multi-skill report (several SKILL.md files) instead carries
+          # `max_risk_score` and `risk_recommendation` at the top level.
+          assessment = report.get("risk_assessment") or {}
+          risk_score = assessment.get("score", report.get("max_risk_score"))
+          severity = assessment.get("severity")
+          recommendation = assessment.get("recommendation", report.get("risk_recommendation"))
 
-          risk_score = find_first(report, "risk_score")
-          severity = find_first(report, "severity")
-          recommendation = find_first(report, "recommendation")
-          safe_to_install = find_first(report, "safe_to_install")
+          if not isinstance(risk_score, (int, float)):
+              raise SystemExit("skillspector-report.json has no risk score")
 
-          safe = safe_to_install is True
+          # Same rule SkillSpector itself uses for `safe_to_install` in its MCP
+          # server: score <= 50, i.e. the recommendation is not DO_NOT_INSTALL.
+          safe = risk_score <= 50 and recommendation != "DO_NOT_INSTALL"
           safe_text = "true" if safe else "false"
 
           summary_lines = [
@@ -69,7 +79,8 @@ jobs:
               f"- risk_score: `{risk_score}`",
               f"- severity: `{severity}`",
               f"- recommendation: `{recommendation}`",
-              f"- safe_to_install: `{safe_to_install}`",
+              f"- safe_to_install: `{safe_text}`",
+              f"- issues: `{len(report.get('issues') or [])}`",
           ]
 
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
@@ -78,18 +89,21 @@ jobs:
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as outputs:
               outputs.write(f"safe_to_install={safe_text}\n")
               outputs.write(f"risk_score={risk_score}\n")
+              outputs.write(f"recommendation={recommendation}\n")
           PY
 
       - name: Upload SkillSpector artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: skillspector-report
           path: |
             skillspector-report.json
             skillspector-report.md
+          if-no-files-found: warn
 
       - name: Fail when unsafe
         if: steps.parse_report.outputs.safe_to_install != 'true'
         run: |
-          echo "::error::SkillSpector marked this repository as unsafe to install."
+          echo "::error::SkillSpector marked this repository as unsafe to install (recommendation: ${{ steps.parse_report.outputs.recommendation }}, risk_score: ${{ steps.parse_report.outputs.risk_score }})."
           exit 1
