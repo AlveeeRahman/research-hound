@@ -35,6 +35,12 @@ loudly: a research skill that uploads descriptions of unpublished work is the wr
 default however clearly the upload is disclosed. Write diagrams as Mermaid inline
 instead — it renders in Claude Code and claude.ai and never leaves the machine.
 
+## How it is checked
+
+Every push is scanned with NVIDIA SkillSpector (static analyzers, pinned version); reviewed
+false positives are listed with reasons in `.skillspector-baseline.yaml`, and each run's
+summary shows what was suppressed. The README section "Automated safety score" has the gate rule.
+
 ## Scope
 
 In scope: path traversal, arbitrary code execution, or credential disclosure from

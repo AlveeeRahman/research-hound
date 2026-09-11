@@ -1,0 +1,29 @@
+# SkillSpector baseline: findings reviewed by hand and judged not to be problems in this
+# repository. Each rule names the SkillSpector rule id, the file it applies to, and why.
+# CI passes this file to `skillspector scan --baseline`; every run's summary lists what it
+# suppressed. Re-check locally with:
+#   skillspector scan . --no-llm --baseline .skillspector-baseline.yaml --show-suppressed
+# A finding that is not covered here is not hidden: it stays in the report and the score.
+version: 2
+rules:
+  - id: P2
+    path: references/evaluation/security_validation.md
+    reason: "The HTML comment <!-- claim-audit: ignore-next-block --> is the marker skill-vision's claim auditor uses to skip a quoted block of another project's commands; it is not an instruction to the agent."
+  - id: LP1
+    path: scripts/literature-review/generate_pdf.py
+    reason: "Shell use (pandoc via subprocess) is covered by the declared allowed-tools scope Bash(python3 scripts/*); SkillSpector 2.11.2 does not parse Claude Code's scoped Bash(pattern) form, and the scoped form is kept because it is the more precise permission."
+  - id: LP1
+    path: scripts/literature-review/verify_citations.py
+    reason: "The DOI lookup runs inside a script under the declared Bash(python3 scripts/*) scope and is documented in SKILL.md compatibility and SECURITY.md as the one network surface of the skill."
+  - id: E1
+    path: scripts/literature-review/verify_citations.py
+    reason: "api.crossref.org is the documented network surface (SECURITY.md); only the DOI being verified is sent."
+  - id: AST4
+    path: scripts/literature-review/generate_pdf.py
+    reason: "Every subprocess.run call passes an explicit argument list with shell=False to invoke pandoc."
+  - id: EA2
+    path: references/critical-thinking/statistical_pitfalls.md
+    reason: "Prose about checking statistical model assumptions; no tool is executed."
+  - id: EA2
+    path: references/writing/*.md
+    reason: "Prose about verifying references and results before writing; no tool is executed."

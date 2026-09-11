@@ -48,7 +48,7 @@ def _condition_matches(item: dict[str, Any], args: argparse.Namespace) -> bool:
     conditions = require_object(item.get("conditions", {}), "conditions")
     for flag in ("ai", "llm", "routinely_collected", "qualitative_component"):
         required = conditions.get(flag)
-        if required is True and not getattr(args, flag):
+        if required is True and not vars(args).get(flag):
             return False
     return True
 

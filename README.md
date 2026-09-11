@@ -18,18 +18,21 @@ statistical pitfall before a reviewer does.
 
 ## Automated safety score (SkillSpector)
 
-This repository now runs [NVIDIA SkillSpector](https://github.com/NVIDIA/skillspector)
-on every push and pull request:
+Every push and pull request is scanned with [NVIDIA SkillSpector](https://github.com/NVIDIA/skillspector)
+v2.11.2, static analyzers only (`--no-llm`):
 
-- `skillspector scan . --no-llm` generates JSON + Markdown reports as workflow artifacts.
-- The workflow summary publishes the report's `risk_score`, `severity`, `recommendation`
-  and the derived `safe_to_install` as proof of the current safety posture.
-- The check fails when `safe_to_install` is `false`, which uses SkillSpector's own rule:
-  a risk score above 50, i.e. a `DO_NOT_INSTALL` recommendation. A `CAUTION` verdict
-  passes but is visible in the summary.
+- The scan reads [`.skillspector-baseline.yaml`](.skillspector-baseline.yaml), a hand-reviewed
+  list of false positives with a reason for each. Nothing else is filtered, and every run's
+  summary lists exactly what the baseline suppressed.
+- The summary publishes the report's risk score, severity and recommendation, and the JSON
+  and Markdown reports are kept as workflow artifacts.
+- The check fails when SkillSpector's verdict is `DO_NOT_INSTALL` (a risk score above 50).
+  A `CAUTION` verdict passes but is visible in the summary.
+- The semantic analyzers need a model provider: set `SKILLSPECTOR_PROVIDER` and the matching
+  provider key as repository secrets and drop `--no-llm` from the workflow.
 
-If you want to make it a required merge gate, add **SkillSpector scan** as a required
-status check in branch protection settings.
+To make it a required merge gate, add **SkillSpector scan** as a required status check in
+branch protection settings.
 
 ## Get it on the scent
 
