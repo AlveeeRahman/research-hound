@@ -1,6 +1,7 @@
 # Research Hound: a scientific research workflow for Claude Code
 
 [![CI](https://github.com/AlveeeRahman/research-hound/actions/workflows/ci.yml/badge.svg)](https://github.com/AlveeeRahman/research-hound/actions/workflows/ci.yml)
+[![SkillSpector Safety](https://github.com/AlveeeRahman/research-hound/actions/workflows/skillspector.yml/badge.svg)](https://github.com/AlveeeRahman/research-hound/actions/workflows/skillspector.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/AlveeeRahman/research-hound/blob/main/LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 
@@ -14,6 +15,19 @@ workflow (critical thinking, literature review, brainstorming, writing, evaluati
 backed by **21 runnable scripts** that verify what a chat model would
 otherwise just assert. It hunts down the weak citation, the untraceable claim, and the
 statistical pitfall before a reviewer does.
+
+## Automated safety score (SkillSpector)
+
+This repository now runs [NVIDIA SkillSpector](https://github.com/NVIDIA/skillspector)
+on every push and pull request:
+
+- `skillspector scan . --no-llm` generates JSON + Markdown reports as workflow artifacts.
+- The workflow summary publishes `risk_score`, `severity`, `recommendation`, and
+  `safe_to_install` as proof of the current safety posture.
+- The check fails when `safe_to_install` is not `true`.
+
+If you want to make it a required merge gate, add **SkillSpector scan** as a required
+status check in branch protection settings.
 
 ## Get it on the scent
 
