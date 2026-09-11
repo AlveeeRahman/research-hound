@@ -82,8 +82,6 @@ transmission nor create a missing-file fallback. The generated root
 > None of those tools, and no `skills/` directory, ship here. The block is kept verbatim
 > so the finding above is traceable to how it was produced.
 
-<!-- claim-audit: ignore-next-block -->
-
 ```bash
 # Upstream repository (K-Dense AI scientific-agent-skills) — not runnable here:
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover \

@@ -195,8 +195,8 @@ These guides help adapt your review's tone, abstract format, and structure to ma
 ### Required CLI Tools
 ```bash
 # parallel-cli (PRIMARY — for web search and URL extraction)
-curl -fsSL https://parallel.ai/install.sh | bash
-# Or: uv tool install "parallel-web-tools[cli]"
+uv tool install "parallel-web-tools[cli]"
+# Or: pipx install "parallel-web-tools[cli]"
 # Authenticate: parallel-cli auth
 ```
 
