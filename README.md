@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://alveeerahman.github.io/research-hound/"><img src="docs/assets/icon.png" alt="Research Hound" width="128" height="128"></a>
+</p>
+
 # Research Hound: a scientific research workflow for Claude Code
 
 [![CI](https://github.com/AlveeeRahman/research-hound/actions/workflows/ci.yml/badge.svg)](https://github.com/AlveeeRahman/research-hound/actions/workflows/ci.yml)

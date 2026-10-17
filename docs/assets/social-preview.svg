@@ -11,7 +11,7 @@
   <rect width="1280" height="640" fill="url(#bg)"/>
   <rect width="1280" height="10" fill="#34d399"/>
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
-    <text x="86" y="196" font-size="92">🐕</text>
+    <image href="icon.png" x="86" y="100" width="112" height="112"/>
     <text x="86" y="310" font-size="82" font-weight="700" fill="#f8fafc">Research Hound</text>
     <text x="86" y="386" font-size="38" font-weight="500" fill="#34d399">A scientific research workflow</text>
     <text x="86" y="440" font-size="38" font-weight="500" fill="#34d399">for Claude Code</text>
